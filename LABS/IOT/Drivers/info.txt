@@ -1,0 +1,20 @@
+pip install esptool
+-----------------------------------
+Erase
+python -m esptool --chip esp8266 --port COM4 erase_flash
+##ตรง -- port ให้ใส่ port ตามเครื่องตัวเองที่เช็คในขั้นตอนที่1
+Flash Bootloader
+python -m esptool --chip esp8266 --port COM4 --baud 115200 write_flash --flash_size=detect -fm dio 0 esp8266-20220117-v1.18.bin
+##สีส้มคือให้ copy ชื่อของไฟล์ fiemware ที่ดาวน์โหลดมาใส่
+-----------------------------------
+
+
+-----------------------------------
+Erase
+python -m esptool --chip esp8266 --port COM3 erase_flash
+##ตรง -- port ให้ใส่ port ตามเครื่องตัวเองที่เช็คในขั้นตอนที่1
+Flash Bootloader
+python -m esptool --chip esp8266 --port COM3 --baud 115200 write_flash --flash_size=detect -fm dio 0 esp8266-20220117-v1.18.bin
+##สีส้มคือให้ copy ชื่อของไฟล์ fiemware ที่ดาวน์โหลดมาใส่
+-----------------------------------
+

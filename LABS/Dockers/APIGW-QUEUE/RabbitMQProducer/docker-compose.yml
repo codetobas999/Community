@@ -1,0 +1,32 @@
+#https://github.com/deepshig/rabbitmq-docker
+version: "3.2"
+
+# list of containers to be run
+services:
+  # produces container builds the producer image
+  # and produces message to the queue
+  
+  producer:
+    build: producer
+    restart: always
+    ports:
+      - "9001:80"  
+
+    #depends_on:
+    #    - rabbit_mq
+    environment:
+        AMQP_URL: 'amqp://rabbit_mq?connection_attempts=10&retry_delay=10'
+    volumes:
+      - ./producer:/usr/src/app/producer
+
+    networks: 
+    - default
+
+volumes:
+    rabbit_mqdata:
+      driver: local
+
+networks:
+  default:
+    external:
+      name: queue_network # Create Network --> docker network create queue_network      

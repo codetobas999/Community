@@ -1,0 +1,270 @@
+--============== Push Docker hub ==============
+docker login -u ballketball999   --> S@msak8192
+
+docker tag [Image Name] ballketball999/[Image Name(ตัวเล็กทั้งหมด)]:[Version] --> 
+docker tag rabbitmqproducer_producer ballketball999/rabbitmqproducer:1.0
+
+docker push ballketball999/[Image Name(ตัวเล็กทั้งหมด)]:[Version]
+docker push ballketball999/rabbitmqproducer:1.0
+--===============================================
+--===============================================
+--============== Docker Command ==============
+-- Create Network
+docker network create [network_name]
+docker network connect [network_name] [container_name]
+
+docker logs -f containers_id | more
+
+--Save Image in Docker
+docker save -o [file_image_Name].tar [image Name]
+
+--Load Image in Docker
+docker load -i [file_image_Name].tar
+
+--Save Container to Image
+docker commit [container_id] [image_name]
+--===============================================
+--============== Docker-compose Command ==============
+docker-compose stop
+docker-compose build
+docker-compose start
+
+docker-compose up -d
+docker-compose down
+docker-compose ps
+docker network ls
+docker-compose down --rmi all
+--===============================================
+#https://blog.pjjop.org/build-api-gateway-and-monitoring-microservice-with-kong-prometheus-and-grafana/
+
+#C:\Windows\System32\drivers\etc\hosts
+127.0.0.1 konga.dev.docker   # Admin Kongga
+127.0.0.1 mockup             # สำหรับใช่ Mockoon API
+
+--============== NginxReverseProxy ==============
+#Step 1 Create Network  
+docker network create proxy_network
+
+#Step2 Start Docker Compose
+docker-compose up -d
+
+--===============================================
+--============== RabbitMQ Server ==============
+#Step 1 Create Network
+docker network create queue_network
+
+#Step2 Start Docker Compose
+docker-compose up -d
+
+#Step3 เข้า Admin Screen
+http://localhost:15672 -- admin/pass
+--===============================================
+--============== Service Register ==============
+#Step 1 Create Network
+docker network create service_network
+
+#Step2 Start Docker Compose
+docker-compose up -d
+
+--===============================================
+--============== Producer ==============
+#Step1 Start Docker Compose
+docker-compose up -d
+
+#Step2 Test Call procedure 
+http://kong.dev.docker/registerqueue
+http://127.0.0.1:9001/registerqueue
+
+#Step3 Check Queue
+--===============================================
+--============== Consumer ==============
+#Step1 Start Docker Compose
+docker-compose up -d
+
+#Step2 Check Result From API / Queue
+--===============================================
+--============== Service Demo / Service Register ==============
+#Step 1 Create Network
+docker network create service_network
+
+#Step2 Start Docker Compose
+docker-compose up -d
+
+--===============================================
+--============== Kong & Kongga ==============  (Host ในส่วนของ Service ให้ใช้ IP ของเครื่องที่ Active อยู่ เช่น IP WIFI)
+#Step 1 Create Network 
+docker network create kong_network
+
+#Step2 Start Docker Compose
+docker-compose up -d
+
+#Step3 Check Docker Compose/Network
+docker-compose ps
+docker network ls
+
+#Step4 Login Kongga
+http://konga.dev.docker   // Konga : admin/S@msak8192 --> http://konga.dev.docker
+
+#Step5 Config Service / Routes
+
+#Step6 Test Call API
+
+--===============================================
+
+--============== Call Service ผ่าน Kong/ Local ==============
+#Call Service Demo
+http://kong.dev.docker/demo
+127.0.0.1:5001/demo
+
+#Call Service Register
+http://kong.dev.docker/register
+127.0.0.1:7001/register
+
+--===============================================
+เมื่อมีการแก้ไข Code แล้วต้องการ Build ใหม่
+docker-compose stop
+docker-compose build
+docker-compose start
+
+ต้องการดู Log ใน Container
+docker logs containers_id | more
+
+docker-compose down --rmi all
+---------------------------------------------------------------------------------------------------------------
+--------------------------------------------------
+--------------------------------------------------
+--------------------------------------------------
+--  Step by Step Run Process APIGW & Queue
+--------------------------------------------------
+--------------------------------------------------
+--------------------------------------------------
+#Step0 Create hosts(C:\Windows\System32\drivers\etc\hosts)
+127.0.0.1 kong.dev.docker
+127.0.0.1 konga.dev.docker 
+
+Start Moockoon /mock Port 3000 สำหรับ Consumer Call API
+
+#Step1 Create Network  
+    docker network create proxy_network
+    docker network create kong_network
+    docker network create queue_network
+
+#Step2 Run Docer Compose  
+    cd NginxReverseProxy
+    docker-compose up -d
+
+    cd KongAPIGW
+    docker-compose up -d
+    #Konga Admin : http://konga.dev.docker(admin/S@msak8192)
+     - Create User Admin (Name : Devops , Kong Admin URL : http://kong:8001)
+     - Create Service (Service Name, Protocol, Host (Private IP Address), Port และ Path)
+       #(Service Name : registerQueueGW, Protocol : http , Host : 192.168.1.136  , Port : 9001 , Path : /registerqueue)
+     - Create Route (Route Name ใส่ข้อมูล Paths, Methods และ Protocols)
+       #(Route Name : registerQueueRoute , Paths : /registerqueue , Methods : POST , Protocols : http)
+
+    cd RabbitMQServer
+    docker-compose up -d
+    #RabbitMQ Admin : localhost:15672 (guest/guest)
+
+    cd RabbitMQProducer
+    docker-compose up -d
+    #Test For Postman : http://kong.dev.docker/registerqueue 
+    #Check Queue in RabbitMQServer จะต้องมี Queue เข้าไปรอ
+
+    #Start Mockoon เพื่อ Mockup REST API
+
+    cd RabbitMQConsumer
+    docker-compose up -d
+    #Test For Postman : http://kong.dev.docker/registerqueue 
+    #Check Queue in RabbitMQServer จะต้องมีการเอาข้อมูลใน Queue ไปยิง API
+    #ตรวจสอบ Log in Mockoon
+
+
+--------------------------------------------------------------------------------------------------------------
+-- Request Header(Postman)
+project-code = mPAY , uSSD
+ 
+ ------------------------
+-- Create Service 
+ ------------------------
+  Name : Mockoon-GW
+  Url  : http://192.168.1.136:3000/
+  -----------------------
+  Name : registerQueueGW-Container
+  Url  : http://192.168.1.136:9001/registerqueue
+  -----------------------
+
+------------------------
+-- Create Route 
+------------------------
+  Name      : Group-1-Route
+  Paths     : /queryPayment  , /confirmPayment 
+  Headers   : project-code:MPAY
+  Methods   : POST
+  Protocols : http
+  -----------------------
+  Name      : Group-2-Route
+  Paths     : /queryPayment  , /confirmPayment , /queryDocument 
+  Headers   : project-code:USSD,XUSSD
+  Methods   : POST
+  Protocols : http
+  -----------------------  
+  Name      : registerQueueRoute-A
+  Paths     : /registerqueue 
+  Methods   : POST
+  Protocols : http
+  -----------------------  
+
+------------------------
+-- Add Plugin Level Route 
+------------------------
+  #Group-1-MPAY-Route , Group-1-USSD-Route
+    Plugin : basic-auth  --> ไม่ต้องใส่อะไร
+             rate-limiting --> กำหนด Limit ตาม Year/Month/Day/HH/MM
+             request-transformer --> Add/Delete Header/Query-param/uri *** Add Group From Script Lua Script
+
+------------------------
+-- Script Lua Script // แก้ไข Project-code และ X-original-uri
+-------------------------
+GROUP:$((function()
+  local pjcode = headers["Project-code"]
+  local xpath = headers["X-original-uri"]
+  if pjcode == "USSD" or pjcode == "XUSSD" then
+    if xpath == "/queryPayment" then
+      return "G1"
+    elseif xpath == "/queryDocument" then
+      return "G2"  
+    elseif xpath == "/confirmPayment" then
+      return "E1"
+    else
+      return "ER"  
+    end                  
+  else
+    return "ER99"    
+  end  
+  end)())
+ 
+------------------------
+-- Postman Test
+http://kong.dev.docker/registerqueue
+--GET
+{
+ "param_queue_name": "queue",
+ "param_exchange_name": "",
+ "param_routing_key_name": "hello",
+ "service_method": "GET",
+ "service_url": "http://192.168.1.136:3000/mockGET",
+ "service_input": "",
+ "service_sleep": 2
+}
+-- POST
+{
+ "param_queue_name": "queue",
+ "param_exchange_name": "",
+ "param_routing_key_name": "hello",
+ "service_method": "POST",
+ "service_url": "http://192.168.1.136:3000/mockPOST",
+ "service_input": "{''name'': ''Alice'', ''age'': 31, ''children''}",
+ "service_sleep": 2
+}
+ 

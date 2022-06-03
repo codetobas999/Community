@@ -1,0 +1,1 @@
+ตอน Run โปรแกรม Thony จะต้อง Run แบบ Administrator เท่านั้นไม่อย่างนั้นจะ Call Network ไม่ได้

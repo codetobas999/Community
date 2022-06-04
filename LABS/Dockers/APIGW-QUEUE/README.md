@@ -1,5 +1,5 @@
 
-![Plugin-rate-limiting](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/APIGW-QUEUE/images/API_GW_new-ServiceDiagram.jpg)
+![Plugin-rate-limiting](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/APIGW-QUEUE/images/API_GW_new-ServiceDiagram.png)
 # ขั้นตอนการ Run 
 1. เตรียมค่าต่างๆ
     ```command
@@ -131,6 +131,7 @@
         end)())
       ```
 # ขั้นตอนการทดสอบ
+![Plugin-rate-limiting](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/APIGW-QUEUE/images/APIGW_RabbitMQ.png)
 1. ทดสอบผ่าน Postman
         <table>
         <tr>

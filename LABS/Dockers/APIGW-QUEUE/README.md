@@ -1,3 +1,5 @@
+
+![Plugin-rate-limiting](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/APIGW-QUEUE/images/API_GW_new-ServiceDiagram.jpg)
 # ขั้นตอนการ Run 
 1. เตรียมค่าต่างๆ
     ```command

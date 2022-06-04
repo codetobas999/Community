@@ -1,6 +1,4 @@
 # ขั้นตอนการ Run 
-
-
 1. เตรียมค่าต่างๆ
     ```command
         Create hosts(C:\Windows\System32\drivers\etc\hosts)
@@ -107,7 +105,10 @@
   12. Kong-Plugin
       - Authen
       - Rate Limit
+            ![Plugin-rate-limiting](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/APIGW-QUEUE/images/Plugin-rate-limiting.png)
+        
       - Request Transform : Script Lua Script // แก้ไข Project-code และ X-original-uri
+            ![Plugin-request-transformer.png](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/APIGW-QUEUE/images/Plugin-request-transformer.png)
       ```
       GROUP:$((function()
         local pjcode = headers["Project-code"]

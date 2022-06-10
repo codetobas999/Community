@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'memberform.ui'
+#
+# Created by: PyQt5 UI code generator 5.13.0
+#
+# WARNING! All changes made in this file will be lost!
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(416, 296)
+        self.idlabel = QtWidgets.QLabel(Form)
+        self.idlabel.setGeometry(QtCore.QRect(80, 45, 55, 16))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.idlabel.setFont(font)
+        self.idlabel.setObjectName("idlabel")
+        self.savebutton = QtWidgets.QPushButton(Form)
+        self.savebutton.setGeometry(QtCore.QRect(80, 200, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.savebutton.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("venv/Lib/site-packages/pyqt5_tools/Qt/bin/save.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.savebutton.setIcon(icon)
+        self.savebutton.setIconSize(QtCore.QSize(16, 16))
+        self.savebutton.setObjectName("savebutton")
+        self.nametext = QtWidgets.QLineEdit(Form)
+        self.nametext.setEnabled(True)
+        self.nametext.setGeometry(QtCore.QRect(170, 90, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.nametext.setFont(font)
+        self.nametext.setObjectName("nametext")
+        self.emailtext = QtWidgets.QLineEdit(Form)
+        self.emailtext.setEnabled(True)
+        self.emailtext.setGeometry(QtCore.QRect(170, 140, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.emailtext.setFont(font)
+        self.emailtext.setObjectName("emailtext")
+        self.resetbutton = QtWidgets.QPushButton(Form)
+        self.resetbutton.setGeometry(QtCore.QRect(210, 200, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.resetbutton.setFont(font)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("venv/Lib/site-packages/pyqt5_tools/Qt/bin/reset.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.resetbutton.setIcon(icon1)
+        self.resetbutton.setIconSize(QtCore.QSize(16, 16))
+        self.resetbutton.setObjectName("resetbutton")
+        self.emaillabel = QtWidgets.QLabel(Form)
+        self.emaillabel.setGeometry(QtCore.QRect(80, 145, 55, 16))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.emaillabel.setFont(font)
+        self.emaillabel.setObjectName("emaillabel")
+        self.idtext = QtWidgets.QLineEdit(Form)
+        self.idtext.setEnabled(True)
+        self.idtext.setGeometry(QtCore.QRect(170, 40, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.idtext.setFont(font)
+        self.idtext.setObjectName("idtext")
+        self.namelabel = QtWidgets.QLabel(Form)
+        self.namelabel.setGeometry(QtCore.QRect(80, 95, 55, 16))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        self.namelabel.setFont(font)
+        self.namelabel.setObjectName("namelabel")
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form: insert"))
+        self.idlabel.setText(_translate("Form", "ID"))
+        self.savebutton.setText(_translate("Form", "save"))
+        self.savebutton.setShortcut(_translate("Form", "Enter"))
+        self.resetbutton.setText(_translate("Form", "reset"))
+        self.emaillabel.setText(_translate("Form", "E-mail"))
+        self.namelabel.setText(_translate("Form", "Name"))

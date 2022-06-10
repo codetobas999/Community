@@ -1,0 +1,97 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'loginform.ui'
+#
+# Created by: PyQt5 UI code generator 5.13.0
+#
+# WARNING! All changes made in this file will be lost!
+
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(461, 220)
+        font = QtGui.QFont()
+        font.setFamily("MS Sans Serif")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        Form.setFont(font)
+        self.userlabel = QtWidgets.QLabel(Form)
+        self.userlabel.setGeometry(QtCore.QRect(90, 40, 101, 31))
+        self.userlabel.setMinimumSize(QtCore.QSize(47, 0))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.userlabel.setFont(font)
+        self.userlabel.setObjectName("userlabel")
+        self.pwlabel = QtWidgets.QLabel(Form)
+        self.pwlabel.setGeometry(QtCore.QRect(90, 80, 101, 31))
+        self.pwlabel.setMinimumSize(QtCore.QSize(47, 0))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.pwlabel.setFont(font)
+        self.pwlabel.setObjectName("pwlabel")
+        self.loginbutton = QtWidgets.QPushButton(Form)
+        self.loginbutton.setGeometry(QtCore.QRect(100, 130, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.loginbutton.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("pic/login.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.loginbutton.setIcon(icon)
+        self.loginbutton.setObjectName("loginbutton")
+        self.closebutton = QtWidgets.QPushButton(Form)
+        self.closebutton.setGeometry(QtCore.QRect(220, 130, 111, 41))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.closebutton.setFont(font)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("pic/exit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.closebutton.setIcon(icon1)
+        self.closebutton.setObjectName("closebutton")
+        self.pwtext = QtWidgets.QLineEdit(Form)
+        self.pwtext.setGeometry(QtCore.QRect(190, 82, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.pwtext.setFont(font)
+        self.pwtext.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.pwtext.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.pwtext.setObjectName("pwtext")
+        self.usertext = QtWidgets.QLineEdit(Form)
+        self.usertext.setGeometry(QtCore.QRect(190, 40, 151, 31))
+        font = QtGui.QFont()
+        font.setFamily("Microsoft Sans Serif")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.usertext.setFont(font)
+        self.usertext.setObjectName("usertext")
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Log In Form"))
+        self.userlabel.setText(_translate("Form", "username"))
+        self.pwlabel.setText(_translate("Form", "password"))
+        self.loginbutton.setText(_translate("Form", "log in"))
+        self.closebutton.setText(_translate("Form", "close"))

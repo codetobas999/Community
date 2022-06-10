@@ -1,0 +1,17 @@
+from tkinter import *
+
+root = Tk()
+root.title("GUI Example")
+root.geometry("300x250")
+root.option_add('*font', 'tahoma 10 bold')
+frame = Frame(root)
+frame.config(background="cyan")
+frame.place(width=300, height=250, x=0, y=0)
+photo=PhotoImage(file="book.gif")
+label1 = Label(frame, image=photo, text="Label1", width="80", height=60, compound="top", bg="white")
+label1.grid(column=1, row=0, padx=15, pady=15)
+label2 = Label(frame, text="Label2", width=10, anchor=W)
+label2.grid(column=0, row=1, padx=15, pady=15)
+message3 = Message(frame, text="How are you today? I am fine.", width=80, anchor=W, bg="yellow")
+message3.grid(column=1, row=1, padx=15, pady=15)
+root.mainloop()

@@ -1,0 +1,6 @@
+a = float(input("Enter input a = "))
+b = float(input("Enter input b = "))
+c = float(input("Enter input c = "))
+x = a * (b + c)
+y = (a * b) + (a * c)
+print(x, ",", y)

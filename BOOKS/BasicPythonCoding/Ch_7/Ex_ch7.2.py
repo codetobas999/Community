@@ -1,0 +1,6 @@
+a = int(input("Enter the amount of oranges purchased (kilo) = "))
+b = int(input("Enter the price of the purchased orange per a kilogram (Baht) = "))
+c = int(input("Enter the price of the orange sold (Baht) = "))
+loss = (a * b) - (a * c)
+result = (loss * 100) / (a * b)
+print("ขายขาดทุน =", result, "%")

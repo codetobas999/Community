@@ -1,0 +1,6 @@
+width = float(input("Enter input width = "))
+length = float(input("Enter input length = "))
+height = float(input("Enter input height = "))
+x = a * (b + c)
+y = (a * b) + (a * c)
+print(x, ",", y)

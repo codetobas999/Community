@@ -1,0 +1,21 @@
+from tkinter import *
+
+root = Tk()
+root.title("GUI Example")
+root.geometry("300x250")
+root.option_add("*font", "tahoma 10 bold")
+frame = Frame(root)
+frame.config(background="cyan")
+frame.place(width=300, height=250, x=0, y=0)
+root.option_add("*foreground", "navy")
+label1 = Label(frame, text="Radiobutton Example", width=30);
+label1.grid(column=0,row=0, columnspan=2, padx=15, pady=15)
+label2 = Label(frame, text="Customer Type", width=30, bg="cyan")
+label2.grid(column=0,row=1, columnspan=2, padx=5, pady=5)
+var = IntVar()
+r1 = Radiobutton(frame, text="major", width=10, variable=var, value=1)
+r1.grid(column=0, row=2, padx=15, pady=15)
+r2 = Radiobutton(frame, text="senior",  width=10, variable=var,  value=2)
+r2.grid(column=1, row=2, padx=15, pady=15)
+var.set(1)
+root.mainloop()

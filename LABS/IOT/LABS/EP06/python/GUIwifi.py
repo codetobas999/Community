@@ -4,8 +4,10 @@ import threading
 
 def runserver():
     #####################
-    serverip = '192.168.1.136'
-    port = 9009
+    #serverip = '192.168.1.136'
+    serverip = '192.168.1.37'
+    
+    port = 9008
     #####################
 
     buffsize = 4096

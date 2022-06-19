@@ -64,7 +64,7 @@ background-color: rgb(255, 255, 255);
     <property name="title">
      <string>รายการที่เรียกเข้ามา</string>
     </property>
-    <widget class="QListView" name="listView">
+    <widget class="QListView" name="lstResult">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -73,9 +73,21 @@ background-color: rgb(255, 255, 255);
        <height>371</height>
       </rect>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>551</width>
+       <height>371</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>551</width>
+       <height>371</height>
+      </size>
+     </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="txtIP">
     <property name="geometry">
      <rect>
       <x>50</x>
@@ -98,7 +110,7 @@ background-color: rgb(255, 255, 255);
      <string>Port : </string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="txtPort">
     <property name="geometry">
      <rect>
       <x>270</x>

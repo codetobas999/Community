@@ -1,8 +1,33 @@
-from tkinter import *
 import socket
-import threading
 
-def runserver():
+def socketListener(in_serverip , in_port , in_buffsize=4096):
+    server = socket.socket()
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
+    server.bind((in_serverip,in_port))
+    server.listen(1)
+    print('Listening Income Request....')
+
+    client, addr = server.accept()
+    print('connected from:', addr)
+
+    data = client.recv(in_buffsize).decode('utf-8')
+    print(data)
+    client.send('received your messages.'.encode('utf-8'))
+    client.close()
+
+    return data
+
+def socketSendData(in_serverip , in_port , in_meassage , in_buffsize=4096):
+    server = socket.socket()
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
+    server.connect((in_serverip,in_port))
+    server.send(in_meassage.encode('utf-8'))
+    data_server = server.recv(in_buffsize).decode('utf-8')
+    print('Server:' , data_server)
+    server.close()
+    return data_server
+'''
+def displayTemperature():
     #####################
     serverip = '192.168.1.37'
     port = 9008
@@ -50,34 +75,4 @@ def runserver():
                 
             client.send('received your messages.'.encode('utf-8'))
             client.close()
-
-
-
-
-GUI = Tk()
-GUI.geometry('600x600')
-GUI.title('โปรแกรมติดตามสถานะ Temperature IoT by Bas')
-
-FONT = ('Angsana New',30)
-
-# ข้อความแสดง - ไม่เปลี่ยนแปลง
-L1 = Label(GUI,text='สถานะ Temperature จาก MicroPython',font=FONT)
-L1.pack()
-
-# ข้อความแสดง - มีเปลี่ยนแปลง
-v_status = StringVar() #ตัวแปรเก็บค่าสถานะ
-v_status.set('<<< No Status >>>')
-L2 = Label(GUI, textvariable=v_status, font=FONT)
-L2.configure(fg='red')
-L2.pack()
-
-img = PhotoImage(file='level1.png')
-ICON = Label(GUI,image=img)
-ICON.pack()
-
-
-########RUNSERVER########
-task = threading.Thread(target=runserver)
-task.start()
-#########################
-GUI.mainloop()
+'''          

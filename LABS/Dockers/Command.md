@@ -45,11 +45,20 @@
       docker run xxx
       ```
       Examle : docker run xxx
-      
+  - Docker history Image : Specifies to create a mirror of history 
+      ```
+      docker history [OPTIONS] [image]
+      ```
+      Examle : docker history w3big/ubuntu:v3      
   - Docker network Create : Create Network on Docker
   - Docker network Connect : Connect Container to Network on Docker
   - Docker log : View Log In Container
- 
+      ```
+      docker logs [option] [container_id] 
+      ```
+      Examle : docker logs xxx 
+      
+      Examle : docker logs -f xxx | more      
   
 # Command Docker-compose
   - Docker Compose Stop : Stop All Container on Docker Compose

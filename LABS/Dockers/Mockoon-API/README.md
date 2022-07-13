@@ -21,5 +21,7 @@
        ![export-json-2.jpg](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/Mockoon-API/images/export-json-2.jpg)
   3. Test Mockup
           
-          http://localhost:3000/users
+          http://localhost:3000/mockGET
 
+
+## 3. [Documentation](https://mockoon.com/docs/latest/about/)

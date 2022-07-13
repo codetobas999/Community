@@ -1,20 +1,20 @@
 {
-  "uuid": "334447d1-9db7-4fcb-8d80-4a56eacacf61",
+  "uuid": "134d302c-1fc2-4dd5-b1bf-609ae2c3d20c",
   "lastMigration": 20,
-  "name": "Mock-API",
+  "name": "Mockup api",
   "endpointPrefix": "",
   "latency": 0,
   "port": 3000,
   "hostname": "0.0.0.0",
   "routes": [
     {
-      "uuid": "23157be7-3885-49a3-bf50-e6978e8a6850",
+      "uuid": "58f526e7-4f10-4851-86a8-72845e15f696",
       "documentation": "Generate random body (JSON, text, CSV, etc) with templating",
       "method": "get",
       "endpoint": "mockGET",
       "responses": [
         {
-          "uuid": "35db076d-39b5-41e0-a0aa-22576486d73d",
+          "uuid": "ab54bf01-2536-428a-9787-848a87eb9148",
           "body": "{\n  \"service_name\": \"mockGET\",\n  \"status_code\": \"000\",\n  \"status_dessc\": \"Success\",\n  \"data\": [  \n     {\n        \"userId\": \"{{ faker 'random.number' min=10000 max=100000 }}\",\n        \"firstname\": \"{{ faker 'name.firstName' }}\",\n        \"lastname\": \"{{ faker 'name.lastName' }}\" \n      }\n  ] \n}",
           "latency": 0,
           "statusCode": 200,
@@ -34,13 +34,13 @@
       "sequentialResponse": false
     },
     {
-      "uuid": "b2e3898a-9b63-4229-a8b5-65e33d473332",
+      "uuid": "f680dbb9-c270-4ba2-8c60-dfdb5122eb12",
       "documentation": "Generate random body (JSON, text, CSV, etc) with templating",
       "method": "post",
       "endpoint": "mockPOST",
       "responses": [
         {
-          "uuid": "99a642f8-96fb-40a0-8eb5-2a231e0acd6e",
+          "uuid": "ff09f2e2-af33-4f65-b568-ba97f97697ce",
           "body": "{\n  \"service_name\": \"mockPOST\",\n  \"status_code\": \"000\",\n  \"status_dessc\": \"Success\",\n  \"data\": [  \n     {\n        \"userId\": \"{{ faker 'random.number' min=10000 max=100000 }}\",\n        \"firstname\": \"{{ faker 'name.firstName' }}\",\n        \"lastname\": \"{{ faker 'name.lastName' }}\" \n      }\n  ] \n}",
           "latency": 0,
           "statusCode": 200,
@@ -77,10 +77,6 @@
     {
       "key": "Content-Type",
       "value": "application/json"
-    },
-    {
-      "key": "",
-      "value": ""
     }
   ],
   "proxyReqHeaders": [

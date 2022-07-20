@@ -84,6 +84,21 @@ int(ox0x3f) --> เป็นการ Convert hex to int
 [ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/1FOAHI68dhu1OoGNIAIk8HoASjbpj7JvG9QG5sNuwYQE/edit?fbclid=IwAR3DfentWTW3KW91YUPvCUUwmjn6kXHCMPcJy2QXNkU2-bqFD6Nk3a7GPgY)
 
 
+## MicroPython and IoT - EP.11
+P นี้ลุงจะแนะนำวิธีการเชื่อมต่ออุปกรณ์ 3 อย่างเข้าด้วยกันคือ Relay, LCD, DHT22 ให้สามารถทำงานร่วมกันได้ พร้อมทั้งอธิบายคอนเซปการเชื่อมต่ออุปกรณ์ และการประยุกต์ใช้งาน
+ 
+[Youtube](https://www.youtube.com/watch?v=5vCAiFD-q-I)
+
+[Source Code](https://github.com/UncleEngineer/Pico/tree/main/LCD)
+
+[Source Code](https://github.com/dhylands/python_lcd)
+
+[ออกแบบตัวอักษรแบบ custom](https://maxpromer.github.io/LCD-Character-Creator/?fbclid=IwAR1g89wDT8OzDIWwZv-suijYQ3uqvqTQZOgYVTiGvRttu8nQOCM9IaVOh3E)
+
+[ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/1OJ88sjpcwiFc-QCCnGrKrv0vWYpBqmAnVxJB3abAV8Q/edit?fbclid=IwAR3YPtepXM3xf-Y_LjvPwoA_WejPqjBMEo-tOXrarIZdiXW_ygraNDFDLZw)
+
+
+
 ## MicroPython and IoT  2022 (สรุป)
 ทุกท่านสามารถอ่านสไลด์สรุปตามคลิปที่ลุงได้จากลิ้งค์นี้ได้เลย (ทีมงานจะอัพเดตสไลด์หลังจบคลาสทุกครั้งที่เรียน)
 ปล. ห้ามแชร์นอกกลุ่ม หากต้องการนำไปใช้งานต่อ สามารถขอสไลด์พร้อมเหตุผลได้ทางเพจลุง

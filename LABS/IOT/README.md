@@ -98,6 +98,13 @@ P นี้ลุงจะแนะนำวิธีการเชื่อม
 [ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/1OJ88sjpcwiFc-QCCnGrKrv0vWYpBqmAnVxJB3abAV8Q/edit?fbclid=IwAR3YPtepXM3xf-Y_LjvPwoA_WejPqjBMEo-tOXrarIZdiXW_ygraNDFDLZw)
 
 
+## MicroPython and IoT - EP.12
+EP นี้ลุงจะแนะนำวิธีการส่งคำสั่งจากเว็บบราวเซอร์ทั้งในคอมพิวเตอร์หรือมือถือ ส่งไปหา ESP32 โดยตรง ซึ่งจะเขียนโปรแกรมให้ ESP32 ทำตัวเป็นเว็บเซอร์เวอร์ขนาดจิ๋ว สร้างปุ่มขึ้นมาสั่ง ON/OFF ได้
+
+[Youtube](https://www.youtube.com/watch?v=93KEUaRnp-s) 
+
+[ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/1q2Dnl6ylFOLblRXXHKDb8XjO7UKxEwjQXkPlWA41rnk/edit?fbclid=IwAR0d9zuaLKUxj1_35RSmcIAJi_CbpJYWMK2j-NFJtXXUZY9f2COL_2WxbCA)
+
 
 ## MicroPython and IoT  2022 (สรุป)
 ทุกท่านสามารถอ่านสไลด์สรุปตามคลิปที่ลุงได้จากลิ้งค์นี้ได้เลย (ทีมงานจะอัพเดตสไลด์หลังจบคลาสทุกครั้งที่เรียน)

@@ -1,0 +1,19 @@
+{
+    "config_data_source" : [
+        {
+            "path" :"./data",
+            "file_name" : "DATA_REFUND_EQ_R.csv"
+        },
+        {
+            "path" :"./data",
+            "file_name" : "DATA_REFUND_NOT_R.csv"
+        }
+    ],
+    "config_data_destination" : [
+        {
+            "path" :"./output",
+            "file_name" : "output_data.xlsx"
+        } 
+    ]
+
+}

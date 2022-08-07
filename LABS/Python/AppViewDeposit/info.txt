@@ -1,0 +1,20 @@
+Step 1 : ไปยัง Current Path ที่ต้องการติดตั้ง
+Step 2 : ติดตั้ง Virsual Environment  เปิน Command ด้วยสิทธิ์ Admin
+         pip install virtualenv
+	   python -m virtualenv venv -- สร้าง Evironment
+   	   .\venv\Scripts\activate    -- Activate Folder นี้ให้เป็น Evironment
+
+	   pip list    -- ดู Package ทั้งหมดที่อยู่ในเครื่อง
+         
+		pip install -r  requirements.txt
+
+	     pip install pyinstaller
+
+	   pip list    -- ดู Package ทั้งหมดที่อยู่ในเครื่อง
+
+        Create New Folder + Copy file.py	
+         cd New Folder    	
+	     pyinstaller --noconsole -i iconmane.ico -F app.py  --> make Exe
+
+
+		Setup bt inno Setup

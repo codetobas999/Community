@@ -5,6 +5,7 @@ from mylib_main import Mylibs
 #import mylib_main 
 import time
 import _thread 
+import dht
 
 global led_status
 global lcd    
@@ -19,9 +20,21 @@ led_status = 'OFF'
 # LED
 led18 = Pin(18, Pin.OUT)
 led18.on()
-    
+
+# RELAY    
 relay = Pin(26, Pin.OUT)
 relay.off()
+
+# DHT22
+d = dht.DHT22(Pin(19))
+
+def getTemperature():
+    d.measure()
+    time.sleep(1)
+    print("temperature  :", d.temperature())
+    print("humidity  :", d.humidity())
+    return [d.temperature(), d.humidity()]; 
+
 
 def init_app():
     global lcd

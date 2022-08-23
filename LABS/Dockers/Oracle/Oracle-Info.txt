@@ -1,0 +1,10 @@
+https://medium.com/pnpsolution/%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B9%83%E0%B8%8A%E0%B9%89-oracle-18c-%E0%B8%9A%E0%B8%99-docker-7598990401da
+https://medium.com/@mo_saengsala/%E0%B8%A1%E0%B8%B2%E0%B8%97%E0%B8%94%E0%B8%A5%E0%B8%AD%E0%B8%87%E0%B9%83%E0%B8%8A%E0%B9%89-oracle-database-%E0%B8%9A%E0%B8%99-docker-%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%96%E0%B8%AD%E0%B8%B0-e1d107fdb2d2
+
+
+docker run --name OracleXE -p 1521:1521 -p 5500:5500 -e ORACLE_PWD=newPassword1234 -e ORACLE_CHARACTERSET=TH8TISASCII -d oracle-db-18c
+
+docker exec -it OracleXE sqlplus system/newPassword1234@xepdb1
+
+http://download.oracle.com/otn/nt/oracle11g/112010/win64_11gR2_database_1of2.zip
+http://download.oracle.com/otn/nt/oracle11g/112010/win64_11gR2_database_2of2.zip

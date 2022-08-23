@@ -110,7 +110,38 @@ EP นี้ลุงจะแนะนำการเขียนโปรแ�
 
 [Youtube](https://youtu.be/GfV5-38fQSU) 
 
-[ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/17XBYY6g7MmXaWud2WbFEc9UOBdu-d0unoARbp6_i-DM/edit?fbclid=IwAR0VuZH5B1PNRD69S98uIWeFMbtUncYCXLy4-yqwVkaM8HPTlTu4T-y246U)
+## MicroPython and IoT - EP.14
+MicroPython and IoT - EP.14
+EP นี้ลุงจะแนะนำการสร้าง Server สำหรับเก็บข้อมูลจากอุปกรณ์ IoT โดยใช้ Python Django และ Django Rest Framework ซึ่งสามารถใช้เป็นระบบ API จัดเก็บข้อมูลไปจนสร้าง Dashboard สำหรับแสดงผลข้อมูลจากอุปกรณ์ IoT ทำให้สะดวกในการใช้งานเนื่องจากสามารถเปิดผ่าน Web Browser ได้เลย 
+### PC on Package : ติดตั้งบน PC
+   virsualenv : python -m pip install virtualenv
+
+            ขั้นตอน Creaet Env
+                Step1 create folder : Django-Web-Server
+                Step2 Access Path   : cd Django-Web-Server
+                step3 create env    : python -m virtualenv venv
+                step4 Activate env(administrator)  : .\venv\scripts\activate
+                step5 Check Package : pip list
+                step6 Install django  : pip install django==3.2
+                step7 Create Project (iotserver) : django-admin startproject iotserver
+                step8 Access Path : cd iotserver
+                step9 Run Server(iotserver) : python manage.py runserver 0.0.0.0:8000
+                step10 Open File : Django-Web-Server\iotserver\iotserver\settings.py
+                step11 Edit Data : ALLOWED_HOSTS = ['*']
+                step12 Test : http://192.168.1.38:8000/
+                step13 Install djangorestframework  : pip install djangorestframework
+
+                step6 Create File   : requirements.txt
+
+
+###  ESP32 on Package : urequests
+
+[Source Code](https://github.com/UncleEngineer/MicroPython-IoT/blob/main/example-django-micropython.zip) admin/Loong999
+
+
+[Youtube](https://youtu.be/9zpA3Q0M4mQ) 
+
+[ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/187leRr7ofjtBzx3XfqAwN7HyrLLtwqXUAXLrs9p-dm8/edit?fbclid=IwAR0wSJkuMe8boBvhb61GeMas43pL0DvcQvYJghMCx2Rt4-uK47iOVpuvHpA)
 
 ## MicroPython and IoT  2022 (สรุป)
 ทุกท่านสามารถอ่านสไลด์สรุปตามคลิปที่ลุงได้จากลิ้งค์นี้ได้เลย (ทีมงานจะอัพเดตสไลด์หลังจบคลาสทุกครั้งที่เรียน)
@@ -121,3 +152,13 @@ EP นี้ลุงจะแนะนำการเขียนโปรแ�
 ## MicroPython +  DHT22 เซนเซอร์วัดอุณหภูมิและความชื้น
 ใครอยากทดลองเรื่องเซนเซอร์วัดอุณหภูมิ สามารถอ่านสไลด์แล้วทดลองรับค่าอุณหภูมิ ความชื้นได้เลย
 [เอกสาร](https://docs.google.com/presentation/d/1lvkxO6l8L7wNngWUn45vX4Lg36mbvBpd5UnYwMLnxSU/edit?fbclid=IwAR1kE-ISwKETE66d7cZctfAj3RkGKFs7YRJr4uiyNCVX1eSs5K_mKxkRBqA#slide=id.g1324fb0ca6d_0_132)
+
+
+
+Command Python
+   pip list   #Display lib ทั้งหมด
+
+Package
+    virsualenv : python -m pip install virtualenv
+    django     : pip install django==3.2
+    

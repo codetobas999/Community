@@ -1,59 +1,40 @@
 from machine import Pin, SoftI2C
 import network
 import time
-from i2c_lcd import I2cLcd
-import socket
-import _thread
+import _thread 
 import dht
+
+global led_status
+global lcd    
+global mylib
+
+#wifi_cfg = { 'ssid': "Home Bas_2.4G", 'pwd': "S@msak8192" }
 
 
 # LED
-led = Pin(23, Pin.OUT)
-led.off()
+led18 = Pin(18, Pin.OUT)
+led18.on()
 
-# LCD
-i2c = SoftI2C(scl=Pin(22), sda=Pin(21),freq=100000)
-lcd = I2cLcd(i2c, 0x3f,2,16)
-time.sleep(1)
-lcd.clear() # clear lcd
+# RELAY    
+relay = Pin(26, Pin.OUT)
+relay.off()
 
 # DHT22
-d = dht.DHT22(Pin(25))
-t = 0
-h = 0
+d = dht.DHT22(Pin(19))
 
-def check_temp():
-    print('check temp starting...')
-    global t
-    global h
-    while True:
-        try:
-            d.measure()
-            time.sleep_ms(2000) #millisec
-            t = d.temperature()
-            h = d.humidity()
-            print('DHT22:', t, h)
-            time.sleep_ms(5000)
-        except:
-            pass
-        
+def getTemperature():
+    d.measure()
+    time.sleep(1)
+    print("temperature  :", d.temperature())
+    print("humidity  :", d.humidity())
+    return [d.temperature(), d.humidity()]; 
 
 
-text = 'Starting...'
-lcd.putstr(text)
-
-# WIFI
-wifi = 'Uncle Engineer(2.4GHz)'
-password = '212224236'
-wlan = network.WLAN(network.STA_IF)
-wlan.active(True)
-time.sleep(2) # delay 2 seconds
-wlan.connect(wifi, password)
-time.sleep(2)
-status = wlan.isconnected() # True/False
-ip ,_ ,_ ,_ = wlan.ifconfig()
-
-if status == True:
+def init_app():
+    global lcd
+    global mylib
+    
+    lcd = mylib.led_connect()
     lcd.clear()
     text = 'IP:{}'.format(ip)
     lcd.putstr(text)

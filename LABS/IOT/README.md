@@ -110,6 +110,10 @@ EP นี้ลุงจะแนะนำการเขียนโปรแ�
 
 [Youtube](https://youtu.be/GfV5-38fQSU) 
 
+[Source Code](https://github.com/UncleEngineer/MicroPython-IoT/blob/main/test-run.py)
+
+[Document](https://docs.google.com/presentation/d/1lvkxO6l8L7wNngWUn45vX4Lg36mbvBpd5UnYwMLnxSU/edit#slide=id.g1324fb0ca6d_0_132)
+
 ## MicroPython and IoT - EP.14
 MicroPython and IoT - EP.14
 EP นี้ลุงจะแนะนำการสร้าง Server สำหรับเก็บข้อมูลจากอุปกรณ์ IoT โดยใช้ Python Django และ Django Rest Framework ซึ่งสามารถใช้เป็นระบบ API จัดเก็บข้อมูลไปจนสร้าง Dashboard สำหรับแสดงผลข้อมูลจากอุปกรณ์ IoT ทำให้สะดวกในการใช้งานเนื่องจากสามารถเปิดผ่าน Web Browser ได้เลย 
@@ -120,19 +124,164 @@ EP นี้ลุงจะแนะนำการสร้าง Server สำ
                 Step1 create folder : Django-Web-Server
                 Step2 Access Path   : cd Django-Web-Server
                 step3 create env    : python -m virtualenv venv
-                step4 Activate env(administrator)  : .\venv\scripts\activate
+                *step4 Activate env(administrator)   : .\venv\scripts\activate  
                 step5 Check Package : pip list
                 step6 Install django  : pip install django==3.2
                 step7 Create Project (iotserver) : django-admin startproject iotserver
                 step8 Access Path : cd iotserver
-                step9 Run Server(iotserver) : python manage.py runserver 0.0.0.0:8000
+                *step9 Run Server(iotserver) : python manage.py runserver 0.0.0.0:8000
                 step10 Open File : Django-Web-Server\iotserver\iotserver\settings.py
                 step11 Edit Data : ALLOWED_HOSTS = ['*']
                 step12 Test : http://192.168.1.38:8000/
                 step13 Install djangorestframework  : pip install djangorestframework
 
-                step6 Create File   : requirements.txt
+                Step14 Stop Server : Control + c
+                Step15 Create DB On Project : python manage.py migrate 
+                Step16 Create User Admin : python manage.py createsuperuser
+                Step17 User Admin : ใส่ User/email/password ของ admin/S@msak8192
+                Step18 Run Server(iotserver) : python manage.py runserver
+                step19 Access Page Admin : http://127.0.0.1:8000/admin
+                Step20 Start App (sensor) In ProjectS : python manage.py startapp sensor
 
+                Step21
+                Folder iotserver
+                แก้ไขไฟล์ Setting.py แล้วเพิ่ม App(sensor) ที่เรา Install ในหัวข้อ INSTALLED_APPS
+                  '''
+                     INSTALLED_APPS = [ 
+                           'sensor'
+                     ]
+                   '''
+                แก้ไขไฟล์ urls.py Edit เพิ่ม include --> from django.urls import path , include
+                                 New Record --> path('', include('sensor.urls'))
+                  '''
+                     from django.contrib import admin
+                     from django.urls import path , include
+                     
+                     urlpatterns = [
+                           path('admin/', admin.site.urls),
+                           path('', include('sensor.urls')) #localhost:8000 -> app
+                     ]
+                  '''
+                Folder sensor
+                สร้างไฟล์  urls.py 
+                  '''
+                    from django.urls import path
+                    from .views import Home
+                    
+                    urlpatterns = [ 
+                        path('', Home)
+                    ]
+                  '''
+                Create Function โดย Edit view.py 
+                  '''
+                    from django.http import HttpResponse
+                    
+                    def Home(request):
+                        return HttpResponse('<h1>Hello World</h1>')
+                  '''
+                Stepxx Run Server(iotserver) : python manage.py runserver
+                stepxx Diaplay Helloworld in Page : http://127.0.0.1:8000
+                stepxx Install djangorestframework  : pip install djangorestframework
+
+                Folder iotserver
+                แก้ไขไฟล์ Setting.py แล้วเพิ่ม App(sensor) ที่เรา Install ในหัวข้อ INSTALLED_APPS
+                  '''
+                     INSTALLED_APPS = [ 
+                           'rest_framework'
+                     ]
+                   '''
+
+                Folder sensor
+                Edit  views.py        
+                 '''
+                    from rest_framework import status
+                    from rest_framework.response import Response
+                    from rest_framework.decorators import api_view
+                    import json
+                    
+                    def api_post_sensor(request):
+                        print('POST DATA FROM ESP32')
+                  '''
+                Edit  model.py สำหรับเก็บข้อมูล
+                  ''' 
+                    from django.db import models
+                    
+                    class TempHumid(models.Model):
+                        code = models.CharField(max_length=100)
+                        title = models.CharField(max_length=100)
+                        temperature = models.DecimalField(max_digits=5,decimal_places=2,null=True,blank=True)
+                        humidity = models.DecimalField(max_digits=5,decimal_places=2,null=True,blank=True)
+                        timestamp = models.DateTimeField(auto_now_add=True)
+                  '''
+     
+               Stepxx Make Structure(TempHumid)  : python manage.py makemigrations
+               Stepxx Migrate Structure(TempHumid) -- Create or Modify   : python manage.py migrate  Model
+               Stepxx Run Server(iotserver) : python manage.py runserver
+               
+               Folder sensor
+               Edit admin.py
+                '''
+                    from django.contrib import admin
+                    from .models import TempHumid
+                    
+                    admin.site.register(TempHumid)
+                '''     
+
+               Stepxx Diaplay TempHumid in Page : http://127.0.0.1:8000/admin
+
+                Folder sensor
+                New serializers.py
+                '''
+                    from rest_framework import serializers
+                    from .models import TempHumid
+                    
+                    class TempHumidSerializer(serializers.ModelSerializer):
+                        class Meta:
+                            model = TempHumid
+                            fields = ('id','code','title','temperature','humidity')
+                '''
+                Edit views.py
+                '''
+                    from .serializers import TempHumidSerializer
+
+                    @api_view(['POST'])
+                    def api_post_sensor(request):
+                        print('POST DATA FROM ESP32')
+                        if request.method == 'POST' :
+                            ser = TempHumidSerializer(data=request.data)
+                            if ser.is_valid():
+                                ser.save()
+                                return Response(ser.data , status=status.HTTP_201_CREATED)
+                            return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
+                '''
+                Edit views.py
+                '''
+                    urlpatterns = [  
+                        path('api/', api_post_sensor),
+                    ]
+                '''
+                stepxx Run Server(iotserver) : python manage.py runserver 0.0.0.0:8000
+                stepxx Test POST
+                '''    
+                    import requests
+                    
+                    url = 'http://192.168.0.100:8000/api'
+                    data = {'code':'TM-101','title':'Temp1','temperature':25.8,'humidity':56}
+                    r = requests.post(url, json=data)
+                    print(r)
+                '''     
+
+                stepxx test-req.py in Thony
+
+
+
+## MicroPython and IoT - EP.15
+MicroPython and IoT - EP.15
+EP นี้ลุงจะแนะนำการสร้าง Server ต่อจากตอนที่ผ่านมา โดยใช้ Django Rest Framework ซึ่งสามารถใช้เป็นระบบ API จัดเก็บข้อมูลได้ โดยจะทดลองสร้างระบบเก็บข้อมูล และลุงจะแนะนำการสร้าง Cloud เพื่อใช้เก็บข้อมูล IoT ด้วย
+ 
+[Youtube](https://www.youtube.com/watch?v=r43GoyPMLK0) 
+
+[ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/1yIYIIWXvOdN4L7IJiOKi4TOhNid8_STAhZ7oLl1JJrw/edit?fbclid=IwAR3EFB8nkzVG7CB0bZ2qzfw5hAUV6mVqQGV09u_fVZFatOA8HYKZiGR6ypo)
 
 ###  ESP32 on Package : urequests
 

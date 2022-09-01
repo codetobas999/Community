@@ -1,22 +1,25 @@
+import sys 
+sys.path.append("/libs") 
 from machine import Pin, SoftI2C
-import network
+from mylib_main import Mylibs
 import time
 import _thread 
 import dht
-
+  
 global led_status
 global lcd    
 global mylib
+
 
 #wifi_cfg = { 'ssid': "Home Bas_2.4G", 'pwd': "S@msak8192" }
 
 
 # LED
-led18 = Pin(18, Pin.OUT)
-led18.on()
+led = Pin(18, Pin.OUT)
+led.on()
 
 # RELAY    
-relay = Pin(26, Pin.OUT)
+relay = Pin(25, Pin.OUT)
 relay.off()
 
 # DHT22
@@ -34,16 +37,22 @@ def init_app():
     global lcd
     global mylib
     
+    mylib = Mylibs
     lcd = mylib.led_connect()
     lcd.clear()
-    text = 'IP:{}'.format(ip)
-    lcd.putstr(text)
-    time.sleep(2)
-    lcd.clear()
-    lcd.putstr('Connected')
-else:
-    lcd.clear()
-    lcd.putstr('WiFi: disconnected')
+    lcd.putstr('Connect WIfi Start..')
+    ipaddr, netmask, gateway, dns = mylib.wifi_connect('HOME-BKK') # 'HOME-BKK' , 'HOME-CHAINAT'
+    if ipaddr is None:
+       lcd.clear()
+       lcd.putstr('Connect Error !!!')
+    else :
+        time.sleep(2)
+        lcd.clear()
+        text = 'IP:{}'.format(ipaddr)
+        lcd.putstr(text)
+        time.sleep(2)
+        lcd.clear()
+        lcd.putstr('Connected')  
 
 html_on = '''
 <!doctype html>
@@ -102,24 +111,20 @@ html_off = '''
   </body>
 </html>
 '''
-global led_status
-led_status = 'OFF'
+#global led_status
+#led_status = 'OFF'
 
 def runserver():
     global led_status
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    host = ''
-    port = 80
-    s.bind((host,port))
-    s.listen(5)
-
-
+    global mylib
+    print("runserver : Start")
+    s = mylib.socket_connect('',80) 
+    #host = ''
+    #port = 80    
     led_status = 'OFF'
 
     while True:
-        client, addr = s.accept()
-        print('connection from: ', addr)
-        data = client.recv(1024).decode('utf-8')
+        data, client = mylib.socket_get_data(s) 
         print([data])
         
         checkpc = data.split('|')[0]
@@ -163,9 +168,9 @@ def runserver():
     
 def loop_led():
     global led_status
-    
+    print("loop_led : Start")
     led_name = 'LED'
-    for i in range(100):
+    for i in range(5):
         led.on()
         lcd.clear()
         lcd.putstr('{}: ON (AUTO)'.format(led_name))
@@ -176,7 +181,11 @@ def loop_led():
         lcd.putstr('{}: OFF (AUTO)'.format(led_name))
         led_status = 'OFF'
         time.sleep(10)
+    print("loop_led : End")
+init_app()
+#runserver()
+getTemperature()
+loop_led()
+#_thread.start_new_thread(runserver,())
+#_thread.start_new_thread(loop_led,())
 
-
-_thread.start_new_thread(runserver,())
-_thread.start_new_thread(check_temp,())

@@ -9,7 +9,8 @@ import ubinascii
 import time
 
 class Mylibs:
-    wifi_cfg = { 'ssid': "Home Bas_2.4G", 'pwd': "S@msak8192" } # Specify the SSID and password of your WiFi network
+    #wifi_cfg = { 'ssid': "Home Bas_2.4G", 'pwd': "S@msak8192" } # Specify the SSID and password of your WiFi network
+    wifi_cfg = { 'ssid': "HOME-BAS-TRUE-2.4G", 'pwd': "S@msak8192" } # Specify the SSID and password of your WiFi network
     def __init__(self):
         #self.wifi_cfg = wifi_cfg
         print('ini')
@@ -25,9 +26,18 @@ class Mylibs:
         #print([socket_data]) 
         return socket_data , socket_client
 
-    def wifi_connect():
+    def wifi_connect(cfg_wi_add):
         ##################### 
-        WIFI_CFG = { 'ssid': "Home Bas_2.4G", 'pwd': "S@msak8192" } # Specify the SSID and password of your WiFi network
+ 
+        if cfg_wi_add == 'HOME-BKK':
+            print( 'Connect WiFi BKK' )
+            WIFI_CFG = { 'ssid': "HOME-BAS-TRUE-2.4G", 'pwd': "S@msak8192" } # Specify the SSID and password of your WiFi network
+        elif cfg_wi_add == 'HOME-CHAINAT':    
+            print( 'Connect WiFi CHAINAT' )
+            WIFI_CFG = { 'ssid': "Home Bas_2.4G", 'pwd': "S@msak8192" } # Specify the SSID and password of your WiFi network
+        else :
+            print( 'Connect WiFi CHAINAT(Default)' )
+            WIFI_CFG = { 'ssid': "Home Bas_2.4G", 'pwd': "S@msak8192" } # Specify the SSID and password of your WiFi network
         #####################
         wifi_connect = mylib_wifi.connect_wifi( WIFI_CFG , 30 ) # try to connect the network
         if wifi_connect is None:
@@ -43,6 +53,7 @@ class Mylibs:
             print("DNS server  :", dns)
             print("Mac address :", macaddr)
             print("----------------------------")
+            return ipaddr, netmask, gateway, dns
         
     def led_connect():
         # DEFINE LCD 

@@ -13,11 +13,12 @@ def writecsv(data):
         fw.writerow(data)
 
 
-serverip = '192.168.0.197'
+serverip = '192.168.1.40'
 port = 80
 
 def gettemp():
     while True:
+        print('Start : gettemp')
         server = socket.socket()
         server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
         server.connect((serverip,port))

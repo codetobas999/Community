@@ -18,3 +18,57 @@ https://sysadmin.psu.ac.th/2017/07/21/get-started-with-docker-part-1-containers-
 
 https://www.youtube.com/watch?v=LxHiCZCKwa8
 
+เก็บ Docker Image บน Container Registry Google Cloud
+https://bugyourdream.com/blogs/2020/4/1/docker-image-on-google-cloud/
+
+### Cloud RUN & Container Registry
+## Running core commands
+1. List accounts whose credentials are stored on the local system:
+    '''
+        gcloud config list
+    '''
+
+2. List the properties in your active gcloud CLI configuration:
+    '''
+        gcloud config list
+    '''
+
+3. View information about your gcloud CLI installation and the active configuration:
+    '''
+        gcloud info
+    '''
+
+4. View information about gcloud commands and other topics:
+    '''
+        gcloud info
+    '''
+
+    For example, to view the help for gcloud compute instances create
+    '''
+        gcloud help compute instances create
+    '''
+
+
+## Config Docker 
+1. Config Docker Cloud  For location : asia.gcr.io
+    '''
+        gcloud auth configure-docker
+    '''
+2. Bulid Docker 
+    '''
+        docker build -t [HOST:asia.gcr.io]/[PROJECT:my-proj-bas]/[DOCKER-IMAGE] .
+    '''
+    For example
+    '''
+        docker build -t asia.gcr.io/my-proj-bas/mydjango .
+    '''
+3. push Docker
+    '''
+        docker push [HOST:asia.gcr.io]/[PROJECT:my-proj-bas]/[DOCKER-IMAGE]
+    '''
+    For example
+    '''
+        docker push asia.gcr.io/my-proj-bas/mydjango
+    '''
+
+gcloud run deploy mydjango --image asia.gcr.io/my-proj-bas/mydjango --platform managed --region=asia-southeast1 --allow-unauthenticated

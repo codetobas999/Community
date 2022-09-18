@@ -283,6 +283,16 @@ EP นี้ลุงจะแนะนำการสร้าง Server ต่
 
 [ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/1yIYIIWXvOdN4L7IJiOKi4TOhNid8_STAhZ7oLl1JJrw/edit?fbclid=IwAR3EFB8nkzVG7CB0bZ2qzfw5hAUV6mVqQGV09u_fVZFatOA8HYKZiGR6ypo)
 
+## MicroPython and IoT - EP.16
+EP นี้ลุงจะแนะนำการสร้าง Cloud แล้วอัพโหลด project django สำหรับเป็นเว็บไซต์ที่ใช้ในการรองรับ api ที่ถูกส่งมาจากอุปกรณ์ IoT โดยจะอธิบายตั้งแต่การสร้าง private key สำหรับเข้าถึง cloud อย่างปลอดภัย ไปจนการอัพโหลดโปรเจคขึ้นไปรัน
+[Youtube](https://youtu.be/5CPzqtuktJk) 
+
+[ติดปัญหาโพสลงในนี้](https://docs.google.com/document/d/1yIYIIWXvOdN4L7IJiOKi4TOhNid8_STAhZ7oLl1JJrw/edit?fbclid=IwAR2W2IyJ3QUCZa7sqr0i7RPv_gg-VAeC72sCuGHEpxA6UGUqE2ie8xoZiFo)
+
+[Upload to Cloud ](https://docs.google.com/document/d/1r2KdXD8YV0vXNa7jadwHc5A0HIRHASdB2k4aH-dMA_4/edit)
+
+
+
 ###  ESP32 on Package : urequests
 
 [Source Code](https://github.com/UncleEngineer/MicroPython-IoT/blob/main/example-django-micropython.zip) admin/Loong999

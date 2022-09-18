@@ -1,0 +1,28 @@
+1. Install Node
+2. Install VS Cod + Extention
+    - ESLint
+    - Vetur
+    - AutoReName Tag
+    - Color Highlight
+    - Prettier Code Formatter
+    - Live Server 
+3. Debug Tool Vue On Goole Chorme (https://vuejs.org/ --> Get Sarted)
+4. Install Vue  และตรวจสอบ Version
+     - npm install -g @vue/cli
+     - vue --version
+5. Create Project Vue
+     - vue create my-app
+
+6. Run Application
+     - cd my-app
+     - npm run serve
+
+7. เข้า URL 
+  	- Local:   http://localhost:8080/ 
+ 	- Network: http://192.168.1.38:8080/
+
+8. Stop Application
+     - control + c
+
+
+ถึง 2.15

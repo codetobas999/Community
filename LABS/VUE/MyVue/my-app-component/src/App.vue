@@ -2,13 +2,13 @@
   <header>
     <h1>ระบบจัดการข้อมูลพนักงาน</h1>
   </header>
-  <form-component/>  
-  <section class="employee-content">
-    
+
+  <form-component @save="insertEmployee"/>  
+  <section class="employee-content" v-if="employees.length > 0">
       <h2>ข้อมูลพนักงาน</h2>
-      
-      <list-data/>
-  </section>  
+      <list-data :employees="employees" />
+  </section> 
+
     <!--div>
         <h1>App Component</h1>
         <form-component/>
@@ -28,6 +28,18 @@ export default {
       ListData,
       FormComponent
     },
+    data(){
+      return{
+        employees:[]
+      }
+    },
+    methods:{
+      insertEmployee(data){
+          //console.log('insertEmployee')
+          //console.log(data)
+          this.employees.push(data)
+      }
+    }
     
 }
 </script>

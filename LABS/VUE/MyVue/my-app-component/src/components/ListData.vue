@@ -1,5 +1,16 @@
 <template>
-        <ul >  
+         <ul >              
+            <person-data 
+                v-for="(item,index) in employees" 
+                :key="index"  
+                :name="item.name"
+                :salary="item.salary"
+                :department="item.department"    
+                :gender="item.gender"
+                :skill="item.skill"            
+            />           
+        </ul>
+        <!--ul >  
             <person-data 
                 v-for="(item) in employees" 
                 :key="item.id" 
@@ -10,9 +21,11 @@
                 :isVisible="item.isVisible"
                 @show="toggleVisible"
                 @delete="removeEmployee"
+                
             />
             
-        </ul>    
+        <ul-->  
+   
         <!--
         <h1>{{message}}</h1>    
         <person-data name="บาส#1" salary=30000 />
@@ -31,18 +44,18 @@ export default {
     components:{
       PersonData 
     },
-    //props:["employees"],
+    props:["employees"],
     data(){
-        return{
+        /*return{
             employees:[
               {id:1 ,name:"บาส#1",salary:50000,department:"โปรแกรมเมอร์1",isVisible:false },
               {id:2 ,name:"บาส#2",salary:40000,department:"โปรแกรมเมอร์2",isVisible:false },
               {id:3 ,name:"บาส#3",salary:30000,department:"โปรแกรมเมอร์3",isVisible:false },
               {id:4 ,name:"บาส#4",salary:20000,department:"โปรแกรมเมอร์4",isVisible:false }, 
             ]
-        }        
+        }        */
     },
-    methods:{
+    /*methods:{
         toggleVisible(emp_id){
             console.log("Emp id = ",emp_id)
             this.employees = this.employees.map((item)=>{
@@ -58,7 +71,7 @@ export default {
                 return item.id != emp_id
             })
         }
-    },
+    },*/
     /*data(){
         return{
             message:"แสดงรายชื่อพนักงานทุกคน"

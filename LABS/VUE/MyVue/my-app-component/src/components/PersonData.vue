@@ -14,17 +14,22 @@
         <template v-slot:card-header>
             <h1>ชื่อ : {{name}}</h1>
         </template>
-        <template v-slot:card-button>
+        <template v-slot:card-content>
+           <p>เงินเดือน : {{salary}} บาท , เพศ : {{gender}}</p>
+           <p>ตำแน่งงาน : {{department}}</p>
+           <p>ทักษะด้านภาษา : {{skill}}</p>
+        </template>
+        <!--template v-slot:card-button>
             <button @click="showDescription(id)">ดูรายละเอียด</button> &nbsp;
             <button @click="deleteEmployee(id)">ลบข้อมูลพนักงาน</button>
-         </template>
-         <template v-slot:card-content>
+         </template-->
+         <!--template v-slot:card-content>
             <transition name="fade">
                 <div v-show="isVisible">
                     <p>เงินเดือน : {{salary}} บาท, ตำแน่งงาน : {{department}}</p>
                 </div>
             </transition>
-        </template>
+        </template-->
     </CardShow> 
 </template>
 <!-- ******************************************************************* -->
@@ -42,7 +47,7 @@ export default {
         }       
     },*/
     //props:["name","salary"],
-    methods:{
+    /*methods:{
         showDescription(id){
             //console.log("Emp id = ",id)
             this.$emit("show",id) 
@@ -51,12 +56,12 @@ export default {
             //console.log("Emp id = ",id)
             this.$emit("delete",id) 
         }        
-    },
+    },*/
     props:{
-        id:{
+        /*id:{
             type:Number,
             required:true
-        },
+        },*/
         name:{
             type:String,
             required:true
@@ -70,11 +75,18 @@ export default {
             type:String,  
             required:true
         },
-        isVisible:{
+        gender:{
+            type:String,    
+        }, 
+        skill:{
+            type:Array,  
+            required:true
+        },        
+        /*isVisible:{
             type:Boolean,              
             default:false,
             required:true,
-        },            
+        },*/            
     },
 }
 </script>

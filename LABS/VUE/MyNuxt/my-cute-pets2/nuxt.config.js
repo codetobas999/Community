@@ -38,10 +38,16 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
 
+  router: {
+    //base: '/tooleasy/web/',
+    middleware: ['auth']
+  },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
-  vuetify: {
+  /*vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
@@ -57,7 +63,58 @@ export default {
         }
       }
     }
+  },*/
+  vuetify: {
+    // customVariables: ['~/assets/variables.scss'],
+    theme: {
+      dark: false,
+      themes: {
+        light: {
+          primary: '#8dc63f',
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
+
+  axios: {
+    //baseURL: 'http://127.0.0.1:8888/api',
+    baseURL: 'http://localhost:12345/api',
+    credentials: false//true
+  },
+  
+  auth: {
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'access_token',
+          // type: 'JWT',
+          maxAge: 60// * 60,
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60// * 60 * 24 * 30
+        },
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          user: { url: 'me', method: 'get', propertyName: 'data.user' },
+          logout: false
+        }
+      }
+    },
+    redirect: {
+      login: '/login'
+    }
+  },
+  
+  
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

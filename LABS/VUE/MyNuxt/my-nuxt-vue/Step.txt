@@ -42,3 +42,11 @@ https://console.firebase.google.com  ballketball999@gmail.com
 1. Create Project : Nuxt-Demo
 2. Select Thailand
 3. Click Create project
+
+
+
+Nuxt.js Fundamental ตอนที่ 8 - การทำระบบ Authentication //https://devahoy.com/tutorials/nuxtjs-fundamental/nuxt-authentication
+npm install @nuxtjs/auth @nuxtjs/axios
+
+-- Start Authen
+node server.js

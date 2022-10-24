@@ -1,0 +1,6 @@
+https://github.com/coreos/jwt-auth-example
+
+#Build Docker 
+docker build -t jwt-server .
+
+docker run -it -p 8000:6000 jwt-server 

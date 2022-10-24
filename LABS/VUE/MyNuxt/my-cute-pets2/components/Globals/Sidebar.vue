@@ -1,15 +1,15 @@
 <template> 
   <v-navigation-drawer
-    v-model="drawer"
+    v-model="toggle_menu"
     :clipped="true" 
-    :mini-variant="!$vuetify.breakpoint.mobile && !drawer"
-    :expand-on-hover="!$vuetify.breakpoint.mobile && !drawer"
+    :mini-variant="!$vuetify.breakpoint.mobile && !toggle_menu"
+    :expand-on-hover="!$vuetify.breakpoint.mobile && !toggle_menu"
     app
     class="grey lighten-4"
   >
   <v-list nav>
     <v-list-group 
-      v-for="menu in my_authorize"
+      v-for="menu in my_menus"
       :key="menu.title"
       :prepend-icon="`${menu.icon + menuClass(menu)}`"
       no-action
@@ -66,34 +66,39 @@
       },
     },
     computed: {
-      drawer: {
+      toggle_menu: {
         get() {
-          console.log('side-drawer' + this.$store.state.drawer)  
-          return this.$store.state.drawer
+          console.log('toggle_menu' + this.$store.state.toggle_menu)  
+          return this.$store.state.toggle_menu
         },
         set(newVal) {
-          this.$store.commit('set_drawer', newVal)
+          this.$store.commit('set_toggle_menu', newVal)
         }
       }, 
-      my_authorize: {
+      /*my_authorize: {
         get() {
           console.log('my_authorize :' + this.$store.state.authorize) 
           return this.$store.state.authorize
         }, 
+      },*/
+      my_menus: {
+        get() {
+          console.log('my_menus :' + this.$store.state.menus) 
+          return this.$store.state.menus
+        }, 
       },
-
     },
     mounted() {
-    this.my_authorize.forEach((menu, mindex) => {
+    this.my_menus.forEach((menu, mindex) => {
       let active = false
       menu.pages &&
         menu.pages.forEach((item, pindex) => { 
-          this.my_authorize[mindex].pages[pindex].active = this.$route.path.includes(
+          this.my_menus[mindex].pages[pindex].active = this.$route.path.includes(
             item.to
           )
           active = active || item.active 
         })
-      this.my_authorize[mindex].active = active 
+      this.my_menus[mindex].active = active 
     })
   }, 
   }

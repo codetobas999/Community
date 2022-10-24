@@ -1,6 +1,6 @@
 <template> 
   <v-app-bar :clipped-left="true" app dense flat dark>
-    <v-app-bar-nav-icon @click.stop="toggleDrawer" />
+    <v-app-bar-nav-icon @click.stop="toggle_menu" />
     <div class="mx-5"><Logobar /></div>
     <v-spacer />
     <v-toolbar-items> 
@@ -68,9 +68,9 @@ export default {
       }
     },
     methods: {
-      toggleDrawer() {
-        console.log('top-toggleDrawer :' + this.$store.state.drawer) 
-        this.$store.commit('set_drawer', !this.$store.state.drawer)
+      toggle_menu() {
+        console.log('top-toggleDrawer :' + this.$store.state.set_toggle_menu) 
+        this.$store.commit('set_toggle_menu', !this.$store.state.set_toggle_menu)
       },
       menuClass(menu) {
        return menu.pages &&

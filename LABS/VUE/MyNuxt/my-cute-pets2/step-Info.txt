@@ -1,0 +1,7 @@
+
+https://dockerize.io/guides/docker-nuxtjs-guide
+
+#Build Docker 
+docker build -t my-cute-pets2.
+
+docker run -it -p 9000:3000 my-cute-pets2

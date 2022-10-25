@@ -1,0 +1,15 @@
+Docker 
+https://dockerize.io/guides/docker-nuxtjs-guide
+
+#Build Docker 
+docker build -t my-cute-pets2.
+
+docker run -it -p 9000:3000 my-cute-pets2
+
+
+https://github.com/coreos/jwt-auth-example
+
+#Build Docker 
+docker build -t jwt-server .
+
+docker run -it -p 8000:6000 jwt-server 

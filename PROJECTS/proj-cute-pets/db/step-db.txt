@@ -1,0 +1,5 @@
+https://blog.me-idea.in.th/mongodb-docker-compose-up-%E0%B8%9B%E0%B8%B8%E0%B9%8A%E0%B8%9A%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87-mongo-database-%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%9A-d27004a9fd78
+
+docker pull mongo
+
+docker-compose up

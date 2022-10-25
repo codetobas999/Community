@@ -1,0 +1,72 @@
+
+1. Install Node
+
+2. Create Project Vue
+     - npx create-nuxt-app my-cute-pets
+     ? Project name: my-cute-pets
+     ? Programming language: JavaScript
+     ? Package manager: Npm
+     ? UI framework: Vuetify.js
+     ? Nuxt.js modules: Axios - Promise based HTTP client
+     ? Linting tools: Prettier
+     ? Testing framework: None
+     ? Rendering mode: Universal (SSR / SSG)
+     ? Deployment target: Server (Node.js hosting)
+     ? Development tools:jsconfig.json (Recommended for VS Code if you're not using typescript)
+
+3. project my-cute-pets
+
+4. intstall nuxtjs/axios 
+        npm install @nuxtjs/auth @nuxtjs/axios
+
+4. Run Application 
+        cd my-cute-pets
+        npm run dev
+
+5. To build & start for production:
+        cd my-cute-pets
+        npm run build
+        npm run start
+
+6. เข้า URL 
+  	- Local:   http://localhost:8080/ 
+ 	- Network: http://192.168.1.38:8080/
+
+7. Stop Application
+     - control + c
+
+-------------------------------------------------------
+Create Docker Image
+1. cd my-cute-pets
+
+2. Run Command Build Image
+        docker build -t my-cute-pets .
+
+3. Run Container
+        docker run -it -p 9000:3000 my-cute-pets
+
+
+
+
+
+     
+ 
+https://bootstrap-vue.org/
+https://pixabay.com/images/search/uthai/?manual_search=1
+https://github.com/axios/axios
+https://devahoy.com/tutorials/nuxtjs-fundamental/nuxt-vuex
+https://medium.com/amiearth/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%94%E0%B8%B6%E0%B8%87%E0%B8%82%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%88%E0%B8%B2%E0%B8%81-api-%E0%B9%83%E0%B8%99-store-%E0%B9%82%E0%B8%94%E0%B8%A2%E0%B9%83%E0%B8%8A%E0%B9%89-vuex-%E0%B8%AA%E0%B8%B3%E0%B8%AB%E0%B8%A3%E0%B8%B1%E0%B8%9A-nuxtjs-ef10ad1c1f0b
+
+
+https://console.firebase.google.com  ballketball999@gmail.com
+1. Create Project : Nuxt-Demo
+2. Select Thailand
+3. Click Create project
+
+
+
+Nuxt.js Fundamental ตอนที่ 8 - การทำระบบ Authentication //https://devahoy.com/tutorials/nuxtjs-fundamental/nuxt-authentication
+npm install @nuxtjs/auth @nuxtjs/axios
+
+-- Start Authen
+node server.js

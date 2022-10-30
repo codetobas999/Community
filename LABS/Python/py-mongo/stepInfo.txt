@@ -1,0 +1,14 @@
+virtualenv.exe venv
+.\venv\Scripts\activate
+pip install pymongo fastapi uvicorn
+
+create File & Folder
+
+
+-------------
+
+Run 
+uvicorn index:app --reload
+
+Test URL 
+http://localhost:8000/docs

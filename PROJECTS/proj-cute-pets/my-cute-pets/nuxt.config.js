@@ -83,7 +83,7 @@ export default {
   },
 
   axios: {
-    //baseURL: 'http://127.0.0.1:8888/api',
+    //baseURL: 'http://127.0.0.1:8000/api/v1/auth',
     baseURL: 'http://localhost:12345/api',
     credentials: false//true
   },
@@ -106,6 +106,7 @@ export default {
           login: { url: 'login', method: 'post', propertyName: 'data.token' },
           user: { url: 'me', method: 'get', propertyName: 'data.user' },
           logout: false
+          //logout: { url: 'logout', method: 'delete', propertyName: 'data.user' },
         }
       }
     },

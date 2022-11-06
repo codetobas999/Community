@@ -1,0 +1,42 @@
+
+https://dockerize.io/guides/docker-nuxtjs-guide
+
+python -m venv venv
+.\venv\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install  xxx
+pip freeze > requirements.txt
+deactivate
+
+#Build Docker 
+cd D:\Forks\github\Community\LABS\VUE\MyNuxt\my-cute-pets
+docker build -t my-cute-pets .
+
+docker run -it -p 9000:3000 my-cute-pets
+
+
+--------
+Init run
+1. Start Authen(Vue->Authen->DemoAuthen)
+   cd D:\Forks\github\Community\LABS\VUE\Authen\DemoAuthen
+   node server.js
+
+
+http://localhost:9000/login
+
+
+-------------
+Run ผ่าน nuxt 
+        cd my-nuxt-vue
+        npm run dev
+
+
+
+
+//AUTH
+https://www.youtube.com/watch?v=2DwdzXyYJo4&list=PLXm-UJjVcJCMd24NIQTPcqHhfnK-QbPmD&index=20
+https://auth.nuxtjs.org/schemes/local/#usage
+
+
+//Function api
+https://www.youtube.com/watch?v=0xeJpQik9Kg&list=PLXm-UJjVcJCMd24NIQTPcqHhfnK-QbPmD&index=21

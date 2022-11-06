@@ -1,0 +1,26 @@
+
+python -m venv venv
+.\venv\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install fastapi motor dnspython pydantic uvicorn autopep8 "pydantic[email]" HTTPie passlib bcrypt asgiref beanie python-jose python-multipart pydantic[dotenv]
+pip freeze > requirements.txt
+
+---ให้ใช้ Env ใน venv ของ Project
+Ctrl+Shift+P แล้วพิมพ์ Python: Select Interpreter แล้วเลือก venv --> Scripts --> python.exe
+
+
+
+
+pip install -r requirements.txt
+
+
+
+python .\main.py
+
+http://localhost:8080/docs#/
+
+--MongoDB Cloud Free
+https://account.mongodb.com/account/login?_ga=2.67957910.64918984.1667577351-1304133611.1667577350
+
+
+MongoDB Community Server

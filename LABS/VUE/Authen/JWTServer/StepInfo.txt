@@ -4,3 +4,11 @@ https://github.com/coreos/jwt-auth-example
 docker build -t jwt-server .
 
 docker run -it -p 8000:6000 jwt-server 
+
+
+python -m venv venv
+.\venv\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install  jwt Flask
+pip freeze > requirements.txt
+deactivate

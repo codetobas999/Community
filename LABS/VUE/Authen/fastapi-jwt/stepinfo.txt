@@ -1,0 +1,24 @@
+
+python -m venv venv
+.\venv\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install fastapi "uvicorn[standard]" beanie python-decouple email-validator python-jose[cryptography] python-jose[cryptography] "passlib[bcrypt]" python-multipart  
+pip install -r requirements.txt
+pip freeze > requirements.txt
+deactivate
+
+--Run App
+uvicorn app.app:app --reload
+
+--Concept
+API/AUTH/JWT       -->Service(UserService) --> Model(schema) --> DB
+API/API_V1/Handles --> Service --> Model(schema) --> DB
+
+--Init
+1. Start MongoDB On Docker Compose(D:\Forks\github\Community\PROJECTS\proj-cute-pets\db)
+
+ 
+
+---ให้ใช้ Env ใน venv ของ Project
+Ctrl+Shift+P แล้วพิมพ์ Python: Select Interpreter แล้วเลือก venv --> Scripts --> python.exe
+

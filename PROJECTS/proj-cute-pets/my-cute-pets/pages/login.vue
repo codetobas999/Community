@@ -89,7 +89,7 @@ export default {
       usernameRules: [
         (v) => !!v || 'Username is required',
         (v) =>
-          (v && v.length >= 4 && v.length <= 15) ||
+          (v && v.length >= 4 && v.length <= 25) ||
           'Username must contain between 4 and 15 characters.',
       ],
       passwordRules: [
@@ -159,9 +159,10 @@ export default {
       this.clearAlert()
       this.isLoading = true
       this.menus = this.my_menus//กำหนดสิทธิ์การเข้า Menu
-
+ 
       await this.$auth
-        .loginWith('local', { data: this.login })
+        /*.loginWith('local', { data: this.login })*/
+        .loginWith('local', {data:`username=${this.login.username}&password=${this.login.password}`})
         .then((response) => {
           console.log(response)
           // redirect page

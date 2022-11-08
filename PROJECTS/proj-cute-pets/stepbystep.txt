@@ -1,3 +1,54 @@
+===========================
+-------- DB Mongo ---------
+===========================
+----------------------
+1. Pull DB (MongoDB)
+   docker pull mongo
+
+2. Start DB (MongoDB)
+   cd D:\Forks\github\Community\PROJECTS\proj-cute-pets\db
+   docker-compose up
+
+Ref : https://blog.me-idea.in.th/mongodb-docker-compose-up-%E0%B8%9B%E0%B8%B8%E0%B9%8A%E0%B8%9A%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87-mongo-database-%E0%B8%9B%E0%B8%B1%E0%B9%8A%E0%B8%9A-d27004a9fd78
+
+##############################################################################################################
+===========================
+-------- Back End ---------
+===========================
+
+1. Start App
+   .\venv\Scripts\activate
+   uvicorn app.app:app --reload
+   deactivate
+
+   http://127.0.0.1:8000/docs
+
+2. Concept
+   API/AUTH/JWT       -->Service(UserService) --> Model(schema) --> DB
+   API/API_V1/Handles --> Service --> Model(schema) --> DB
+
+
+// Create Project 
+python -m venv venv
+.\venv\Scripts\activate
+python.exe -m pip install --upgrade pip
+pip install fastapi "uvicorn[standard]" beanie python-decouple email-validator python-jose[cryptography] python-jose[cryptography] "passlib[bcrypt]" python-multipart  
+pip install -r requirements.txt
+deactivate
+ 
+##############################################################################################################
+===========================
+-------- Web App ---------
+===========================
+
+cd my-cute-pets
+        npm run dev
+
+##############################################################################################################
+
+
+
+
 
 1. Install Node
 

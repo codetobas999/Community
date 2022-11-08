@@ -14,8 +14,9 @@
 
    1. Run Command
           
-          docker run -d --mount type=bind,source=D:\Forks\github\codetobas999\Community\LABS\Dockers\Mockoon-API\mockup-data\data.json,target=/data,readonly -p 3000:3000 mockoon/cli:latest -d data -p 3000
+          docker run -d --mount type=bind,source=D:\Forks\github\codetobas999\Community\LABS\Dockers\Mockoon-API\mockup-data\data.json,target=/data,readonly -p 3000:3000 mockoon/cli:latest -d data -p 3000 -t
         
+        *** -t ให้แสดง Information logs
         *** D:\Forks\github\codetobas999\Community\LABS\Dockers\Mockoon-API\mockup-data\data.json ต้องใส่ Path ตาม Step 1   
         *** ชือทั้ง 3 จุดจะต้องเหมือนกัน 
        ![export-json-2.jpg](https://github.com/codetobas999/Community/blob/main/LABS/Dockers/Mockoon-API/images/export-json-2.jpg)

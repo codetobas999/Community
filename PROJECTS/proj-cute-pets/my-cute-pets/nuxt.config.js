@@ -83,9 +83,8 @@ export default {
   },
 
   axios: {
-    //baseURL: 'http://localhost:8000/api/v1/auth',
-    baseURL: 'http://localhost:12345/api',
-    credentials: false//true
+    baseURL: 'http://localhost:8000/api/v1',
+    credentials: true
   },
   
   auth: {
@@ -103,13 +102,19 @@ export default {
           maxAge: 60// * 60 * 24 * 30
         },
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          //login: { url: 'login', method: 'post', propertyName: 'access_token' },
-          user: { url: 'me', method: 'get', propertyName: 'data.user' },
-          //user: { url: 'me', method: 'get', propertyName: 'email' }, 
+          login: { 
+                  url: '/auth/login', 
+                  method: 'post', 
+                  propertyName: 'access_token' 
+                 },
+          user:  { 
+                  url: '/users/me', 
+                  method: 'get',
+                  propertyName: 'email' 
+                 }, 
           logout: false
           //logout: { url: 'logout', method: 'delete', propertyName: 'data.user' },
-        }
+        }  
       }
     },
     redirect: {

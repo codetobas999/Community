@@ -7,6 +7,7 @@ from jose import jwt
 from datetime import datetime
 from pydantic import ValidationError
 from app.services.user_service import UserService
+  
 reuseable_oauth = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/auth/login",
     scheme_name="JWT"
@@ -14,6 +15,7 @@ reuseable_oauth = OAuth2PasswordBearer(
 
 async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
     try:
+        print(">>>get_current_user")
         payload = jwt.decode(token, settings.JWT_SECRET_KEY,algorithms=[settings.ALGORITHM])
         token_data = TokenPayload(**payload)
         if datetime.fromtimestamp(token_data.exp) < datetime.now():
@@ -25,5 +27,5 @@ async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
 
     if not user:
        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Could not find user")
-
+ 
     return user

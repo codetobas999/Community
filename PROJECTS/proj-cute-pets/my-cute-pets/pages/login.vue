@@ -127,6 +127,10 @@ export default {
             {id:6000, name:"กิจกรรม", title: 'กิจกรรม',icon: 'mdi-database',to: '/',isAuthen:true, 
             pages: [ {id:6001, title: 'ดูกิจกรรม', icon: 'mdi-format-list-checks', to: '/activitys',isAuthen:true}, 
                    ]  
+            },  
+            {id:7000, name:"Demo", title: 'Demo',icon: 'mdi-database',to: '/',isAuthen:true, 
+            pages: [ {id:6001, title: 'Demo', icon: 'mdi-format-list-checks', to: '/demo',isAuthen:true}, 
+                   ]  
             },                     
       ],
       my_authorizes: [

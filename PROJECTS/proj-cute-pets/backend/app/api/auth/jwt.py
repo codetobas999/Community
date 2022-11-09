@@ -11,6 +11,7 @@ from app.core.config import settings
 from app.schemas.auth_schema import TokenPayload
 from pydantic import ValidationError
 from jose import jwt
+from uuid import UUID
 
 auth_router = APIRouter()
 
@@ -26,6 +27,18 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()) -> Any:
         "access_token":create_access_token(user.user_id),
         "refresh_token":create_refresh_token(user.user_id)
     }
+
+'''
+https://stackoverflow.com/questions/70928816/how-to-logout-from-jwt-security-scheme-in-fastapi
+
+@auth_router.post("/logout", summary="Logout access token for user",  response_model=TokenSchema)
+async def logout(id: UUID = Depends(get_current_user)):  # logout function to delete access token
+    token_data = TokenPayload(sub=id,exp=0)
+    token_data = TokenData(username=current_user.username, expires=0)
+    return token_data
+    #return "User logout sucessful." 
+ '''
+
 
 @auth_router.post('/test-token', summary="Test if the access token is valid", response_model=User)
 async def test_token(user:User = Depends(get_current_user)):

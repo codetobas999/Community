@@ -15,9 +15,9 @@ reuseable_oauth = OAuth2PasswordBearer(
 
 async def get_current_user(token: str = Depends(reuseable_oauth)) -> User:
     try:
-        print(">>>get_current_user")
         payload = jwt.decode(token, settings.JWT_SECRET_KEY,algorithms=[settings.ALGORITHM])
         token_data = TokenPayload(**payload)
+        print(datetime.fromtimestamp(token_data.exp) )
         if datetime.fromtimestamp(token_data.exp) < datetime.now():
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Token expire",headers={"WWW-Authenticate":"Bearer"})
     except(jwt.JWTError,ValidationError):

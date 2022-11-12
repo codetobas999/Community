@@ -3,7 +3,10 @@
     toggle_menu: false,
     menus: [],            //Authorize Main Menu 
     authorizes: [],       //Authorize Page & Component By User Login
-    
+
+    //Layout : main-default  
+    drawer: false,
+    fixed: false
 
   })
   
@@ -15,6 +18,17 @@
       state.authorizes = newVal
     },
     set_menus(state, newVal) {
+      console.log('SETTING MEU TO', newVal)
       state.menus = newVal
     },  
+
+    //Layout : main-default 
+    set_drawer(state, newDrawerState) {
+      console.log('SETTING DRAWER TO', newDrawerState)
+      state.drawer = newDrawerState
+    },
+    set_fixed(state, newFixedState) {
+      console.log('SETTING DRAWER TO', newFixedState)
+      state.fixed = newFixedState
+    }
   }

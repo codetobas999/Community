@@ -69,7 +69,9 @@ cd my-cute-pets
 3. project my-cute-pets
 
 4. intstall nuxtjs/axios 
-        npm install @nuxtjs/auth @nuxtjs/axios
+        npm install @nuxtjs/auth @nuxtjs/axios  
+        npm install vue-prism-editor -s
+        npm install vee-validate@3 --save //https://vee-validate.logaretm.com/v3/
 
 4. Run Application 
         cd my-cute-pets

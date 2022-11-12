@@ -4,17 +4,17 @@
     <div class="mx-5"><Logobar /></div>
     <v-spacer />
     <v-toolbar-items> 
-      <div v-if="$auth.loggedIn && $auth.user"> 
+      <div v-if="$auth.loggedIn && $auth.user.first_name"> 
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
             <v-avatar
-              :color="stringToColor($auth.user)"
+              :color="stringToColor($auth.user.first_name)"
               v-on="on"
               size="40"
               style="margin-top: 2px"
             >
               <!--span class="white--text headline">{{$auth.user.name.substr(0, 1).toUpperCase()}}</span-->
-              <span class="white--text headline">{{$auth.user.substr(0, 1)}}</span>
+              <span class="white--text headline">{{$auth.user.first_name.substr(0, 1)}}</span>
             </v-avatar>
           </template>
           <v-card>
@@ -22,15 +22,15 @@
               <v-list-item>
                 <v-list-item-avatar>
                   <v-avatar
-                    :color="stringToColor($auth.user)"
+                    :color="stringToColor($auth.user.first_name)"
                     style="min-width: 0px"
                   >
                     <!--span class="white--text headline">{{$auth.user.name.substr(0, 1).toUpperCase()}}</span-->
-                    <span class="white--text headline">{{$auth.user.substr(0, 1)}}</span>
+                    <span class="white--text headline">{{$auth.user.first_name.substr(0, 1)}}</span>
                   </v-avatar>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-list-item-title>{{ $auth.user }}</v-list-item-title>
+                  <v-list-item-title>{{ $auth.user.first_name }}</v-list-item-title>
                   <!--v-list-item-subtitle>{{$auth.user.email}}</!--v-list-item-subtitle-->
                 </v-list-item-content>
               </v-list-item>
@@ -107,8 +107,9 @@ export default {
       }
       hash = ((hash % colors.length) + colors.length) % colors.length
       return colors[hash] 
-    },
-    }
+    }, 
+
+  }, 
   }
   </script>
   

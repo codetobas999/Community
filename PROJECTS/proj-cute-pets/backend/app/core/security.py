@@ -8,7 +8,7 @@ password_context = CryptContext(schemes=["bcrypt"],deprecated="auto")
 
 def create_access_token(subject:Union[str,Any], expires_delta: int = None)-> str:
     if expires_delta is not None : 
-        expires_delta = datetime.utcnow() + expires_delta
+        expires_delta = datetime.utcnow() + timedelta(minutes = expires_delta)
     else: 
         expires_delta = datetime.utcnow() + timedelta(minutes = settings.ACCESS_TOKEN_EXPIRE_MINUTES)
 
@@ -18,7 +18,7 @@ def create_access_token(subject:Union[str,Any], expires_delta: int = None)-> str
 
 def create_refresh_token(subject:Union[str,Any], expires_delta: int = None)-> str:
     if expires_delta is not None :
-        expires_delta = datetime.utcnow() + expires_delta
+        expires_delta = datetime.utcnow() + timedelta(minutes = expires_delta)
     else:
         expires_delta = datetime.utcnow() + timedelta(minutes = settings.REFRESH_TOKEN_EXPIRE_MINUTES)
 

@@ -24,8 +24,11 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  //plugins: [{src: '~/plugins/import-validate.js'}],
+   // {src: '~/plugins/import-validate.js', mode: 'client'}
+   plugins: [
+      //"~/plugins/vee-validate"
+    ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -84,7 +87,7 @@ export default {
 
   axios: {
     baseURL: 'http://localhost:8000/api/v1',
-    credentials: true
+    credentials: false//true
   },
   
   auth: {
@@ -110,9 +113,13 @@ export default {
           user:  { 
                   url: '/users/me', 
                   method: 'get',
-                  propertyName: 'email' 
+                  propertyName: 'data.user' 
                  }, 
-          logout: false
+          logout: { 
+                    url: '/auth/logout', 
+                    method: 'post'  
+          },
+          //logout: false
           //logout: { url: 'logout', method: 'delete', propertyName: 'data.user' },
         }  
       }

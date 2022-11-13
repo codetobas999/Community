@@ -129,3 +129,8 @@ node server.js
 https://sakko-demo-api.herokuapp.com/api/v1/user/sign_in
 saklism+demo99@gmail.com
 12341234
+
+
+-------------------------------------
+Basic : https://www.khomkrit.com/self-studying-vuejs-in-30-minutes/#methods
+Mouted : https://pasupol.medium.com/%E0%B8%AB%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%82%E0%B8%B5%E0%B8%A2%E0%B8%99-vue-js-%E0%B9%80%E0%B8%A5%E0%B9%88%E0%B8%99%E0%B9%86-ep-2-90146f2343c9

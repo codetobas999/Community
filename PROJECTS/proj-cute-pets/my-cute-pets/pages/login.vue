@@ -98,7 +98,7 @@ export default {
           'Your password must contain between 4 and 60 characters.',
       ],
       //my_authorize: [
-      my_menus: [  
+      /*my_menus: [  
         // { icon: 'mdi-apps', title: 'Welcome', to: '/' },
         // { icon: 'mdi-chart-bubble', title: 'Inspire', to: '/inspire' },
             {id:1000, name:"หน้าแรก", title: 'หน้าแรก',icon: 'mdi-apps', to: '/sss',isAuthen:true,
@@ -148,7 +148,7 @@ export default {
                            {code:"delete"},
                          ],  
             }, 
-      ],
+      ],*/
     }
   },
   methods: {
@@ -233,7 +233,7 @@ export default {
     */
   },
   computed: {
-    menus: {
+    /*menus: {
         get() {
           console.log('get_menus' + this.$store.state.menus)  
           return this.$store.state.menus
@@ -252,7 +252,7 @@ export default {
           console.log('set_authorizes' + newVal) 
           this.$store.commit('set_authorizes', newVal)
         }
-      },  
+      }, */ 
     } 
 }
 </script>

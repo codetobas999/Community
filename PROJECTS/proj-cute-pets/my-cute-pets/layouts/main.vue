@@ -84,11 +84,20 @@
     </v-app-bar>
     <!--Top Bar Menu-->
     <!--Content -->
+    
+    <v-main>
+      <v-container fluid >          
+        <nuxt />
+      </v-container>
+    </v-main>
+   
+    <!--  
     <v-content>
       <v-container>
         <nuxt></nuxt>
       </v-container>
     </v-content>
+    -->
     <!--Content -->
     <!--TOP Right Bar Menu-->
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
@@ -121,47 +130,11 @@
 
 <script>
 import { version } from '~/package.json'
-export default {
-  mounted() {
-    console.log('state', this.$nuxt.$store.state)
-  },
+import * as Common from '@/utils/common'
+export default { 
   data() {
     return {  
-      my_menus: [  
-        // { icon: 'mdi-apps', title: 'Welcome', to: '/' },
-        // { icon: 'mdi-chart-bubble', title: 'Inspire', to: '/inspire' },
-            {id:1000, name:"หน้าแรก", title: 'หน้าแรก',icon: 'mdi-apps', to: '/sss',isAuthen:true,
-             pages: []  
-            },
-            {id:2000, name:"บทความ", title: 'บทความ',icon: 'mdi-chart-bubble',to: '/',isAuthen:true, 
-            pages: [ {id:2001, title: 'บทความ1', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                     {id:2002, title: 'บทความ2', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                    ]  
-            },    
-            {id:3000, name:"ผู้เขียน", title: 'ผู้เขียน',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:3001, title: 'ผู้เขียน1', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                     {id:3002, title: 'ผู้เขียน2', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                    ]  
-            },
-            {id:4000, name:"ข้อมูลลูกค้า", title: 'ข้อมูลลูกค้า',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:4001, title: 'เพิ่มประวัติ', icon: 'mdi-format-list-checks', to: '/registers',isAuthen:true},
-                     {id:4002, title: 'แก้ไขประวัติ', icon: 'mdi-format-list-checks', to: '/registers/customer_info',isAuthen:true},
-                     {id:4003, title: 'แก้ไขประวัติ2', icon: 'mdi-format-list-checks', to: '/registers/customer_info2',isAuthen:true},
-                    ]  
-            }, 
-            {id:5000, name:"ตารางนัดหมาย", title: 'ตารางนัดหมาย',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:5001, title: 'ดูนัดหมาย', icon: 'mdi-format-list-checks', to: '/appointments',isAuthen:true}, 
-                   ]  
-            },     
-            {id:6000, name:"กิจกรรม", title: 'กิจกรรม',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:6001, title: 'ดูกิจกรรม', icon: 'mdi-format-list-checks', to: '/activitys',isAuthen:true}, 
-                   ]  
-            },  
-            {id:7000, name:"Demo", title: 'Demo',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:6001, title: 'Demo', icon: 'mdi-format-list-checks', to: '/demo',isAuthen:true}, 
-                   ]  
-            }, 
-            ],       
+      my_menus: [],
       clipped: true,
       miniVariant: true,
       right: true,
@@ -169,7 +142,16 @@ export default {
       title: 'Demo รักษาสัตว์'
     }
   },
+  mounted() {
+    console.log('state', this.$nuxt.$store.state)
+    this.getmenu()
+  },
   methods: {  
+      async getmenu(){
+        const data = await Common.getMenus()
+        this.my_menus = data
+        console.log('menu', data)
+      },
       menuClass(menu) {
        return menu.pages &&
          menu.pages.some((item) => this.$route.path.includes(item.to)) 
@@ -214,15 +196,14 @@ export default {
         },  */
     drawer: {
       get() {
-        console.log('get VAL', this.$nuxt.$store.state.drawer)
-        //my_menus = this.$nuxt.$store.state.menus
+        console.log('GET DRAWER :', this.$nuxt.$store.state.drawer) 
         return this.$nuxt.$store.state.drawer
       },
       set(val) {
-        console.log('OLD VAL', this.$nuxt.$store.state.drawer)
-        console.log('NEW VAL', val)
+        console.log('SET DRAWER(OLD VAL) :', this.$nuxt.$store.state.drawer)
+        console.log('SET DRAWER(NEW VAL) :', val)
         this.$store.commit('set_drawer', val)
-        console.log('NEW DRAWER STATE', this.$nuxt.$store.state.drawer)
+        console.log('SET DRAWER(IN STATE) :', this.$nuxt.$store.state.drawer)
       }
     },
     fixed: {

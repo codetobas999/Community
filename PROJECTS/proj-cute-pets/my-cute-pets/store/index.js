@@ -24,11 +24,11 @@
 
     //Layout : main-default 
     set_drawer(state, newDrawerState) {
-      console.log('STORE (SETTING DRAWER TO) :', newDrawerState)
+      //console.log('STORE (SETTING DRAWER TO) :', newDrawerState)
       state.drawer = newDrawerState
     },
     set_fixed(state, newFixedState) {
-      console.log('STORE (SETTING FIXED TO)', newFixedState)
+      //console.log('STORE (SETTING FIXED TO)', newFixedState)
       state.fixed = newFixedState
     }
   }

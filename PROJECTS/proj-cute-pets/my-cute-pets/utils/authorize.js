@@ -1,10 +1,11 @@
 import { request } from './api'
 
-const HOSTNAME = 'http://localhost:3333'
+const HOSTNAME = 'http://127.0.0.1:7000'
 
-export function showMenu() {
-  const url = `${HOSTNAME}/menus`
-  return request('get', url, {}, false)
+export async function showMenu() {
+  const url = `${HOSTNAME}/menus` 
+  const response = await request('get', url, {}, true) 
+  return response.data
 }
 /*
 export function show(id) {

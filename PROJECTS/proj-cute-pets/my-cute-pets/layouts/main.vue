@@ -142,15 +142,33 @@ export default {
       title: 'Demo รักษาสัตว์'
     }
   },
+  /*mounted() {
+    console.log('state', this.$nuxt.$store.state)
+    this.getmenu()
+  },*/
   mounted() {
     console.log('state', this.$nuxt.$store.state)
     this.getmenu()
+    this.my_menus.forEach((menu, mindex) => {
+      let active = false
+      menu.pages &&
+        menu.pages.forEach((item, pindex) => {
+          this.menus[mindex].pages[pindex].active = this.$route.path.includes(
+            item.to
+          )
+          active = active || item.active
+        })
+      this.menus[mindex].active = active
+    })
   },
   methods: {  
       async getmenu(){
         const data = await Common.getMenus()
+        //console.log("typeof data");
+        //console.log(typeof data);
+        //console.log(data);
         this.my_menus = data
-        console.log('menu', data)
+        //console.log('menu', data)
       },
       menuClass(menu) {
        return menu.pages &&
@@ -196,14 +214,15 @@ export default {
         },  */
     drawer: {
       get() {
-        console.log('GET DRAWER :', this.$nuxt.$store.state.drawer) 
+        //console.log('GET DRAWER :', this.$nuxt.$store.state.drawer) 
         return this.$nuxt.$store.state.drawer
       },
       set(val) {
-        console.log('SET DRAWER(OLD VAL) :', this.$nuxt.$store.state.drawer)
-        console.log('SET DRAWER(NEW VAL) :', val)
+        //Common.writelog('SET DRAWER(OLD VAL) :' +  this.$nuxt.$store.state.drawer , 9)
+        //console.log('SET DRAWER(OLD VAL) :', this.$nuxt.$store.state.drawer)
+        //console.log('SET DRAWER(NEW VAL) :', val)
         this.$store.commit('set_drawer', val)
-        console.log('SET DRAWER(IN STATE) :', this.$nuxt.$store.state.drawer)
+        //console.log('SET DRAWER(IN STATE) :', this.$nuxt.$store.state.drawer)
       }
     },
     fixed: {
@@ -211,10 +230,10 @@ export default {
         return this.$nuxt.$store.state.fixed
       },
       set(val) {
-        console.log('OLD VAL', this.$nuxt.$store.state.fixed)
-        console.log('NEW VAL', val)
+        //console.log('OLD VAL', this.$nuxt.$store.state.fixed)
+        //console.log('NEW VAL', val)
         this.$store.commit('set_fixed', val)
-        console.log('NEW DRAWER STATE', this.$nuxt.$store.state.fixed)
+        //console.log('NEW DRAWER STATE', this.$nuxt.$store.state.fixed)
       }
     }
   }

@@ -24,6 +24,7 @@ export function create(item) {
     { 
       title: item.title ,
       description: item.description , 
+      todo_date: item.todo_date,
       status: item.status
     },
     true
@@ -40,6 +41,7 @@ export function update(item) {
     { 
       title: item.title ,
       description: item.description , 
+      todo_date: item.todo_date,
       status: item.status
     },
     true

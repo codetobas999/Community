@@ -11,8 +11,8 @@ class User(Document):
     username: str = Indexed(str , unique=True)
     email: Indexed(EmailStr , unique=True) 
     hashed_password: str
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    first_name: str  #Optional[str] = None
+    last_name: str   #Optional[str] = None
     disabled: Optional[bool] = None
 
     def __repr__(self) -> str:

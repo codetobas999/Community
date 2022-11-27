@@ -19,7 +19,7 @@
           <v-dialog
             v-model="dialog"
             max-width="500px"
-          >
+          > 
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 color="primary"
@@ -30,7 +30,8 @@
               >
                 New Item
               </v-btn>
-            </template>
+            </template>  
+
             <v-card>
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
@@ -59,16 +60,7 @@
                         label="Description"
                       ></v-text-field>
                     </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="editedItem.status"
-                        label="Status"
-                      ></v-text-field>
-                    </v-col>
+                   
                     <!--
                     <v-col
                       cols="12"
@@ -91,6 +83,63 @@
                       ></v-text-field>
                     </v-col>
                     -->
+                  </v-row>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                    <v-menu
+                        v-model="picker_todo_date"
+                        :close-on-content-click="false"
+                        :nudge-right="40"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="auto"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="editedItem.todo_date"
+                            label="Todo Date"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                          ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          v-model="editedItem.todo_date"
+                          @input="picker_todo_date = false"
+                        ></v-date-picker>
+                      </v-menu>
+                      </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="8"
+                    >
+                     <!--
+                    <v-checkbox
+                     v-model="editedItem.status"
+                     :label="`Status : ${editedItem.status.toString()}`"
+                    ></v-checkbox>
+                    -->
+                    <v-switch
+                    v-model="editedItem.status"
+                     inset
+                     :label="`Status : ${editedItem.status.toString()}`"
+                     ></v-switch>
+
+                      <!--
+                      <v-text-field
+                        v-model="editedItem.status"
+                        label="Status"
+                      ></v-text-field>
+                      -->
+                    </v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
@@ -161,6 +210,9 @@
       data: () => ({
            dialog: false,
            dialogDelete: false,
+           date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+           picker_todo_date: false,
+
       /*headers: [
         {
           text: 'Dessert (100g serving)',
@@ -175,38 +227,40 @@
         { text: 'Actions', value: 'actions', sortable: false },
       ],*/
       //desserts: [],
-      headers: [
-        {
-          text: 'todo_id',
-          align: 'start',
-          sortable: false,
-          value: 'todo_id',
+        headers: [
+          /*{
+            text: 'todo_id',
+            align: 'start',
+            sortable: false,
+            value: 'todo_id',
+          },*/
+          { text: 'Title', value: 'title' },
+          { text: 'Description', value: 'description' },
+          { text: 'Description', value: 'description' },
+          { text: 'Todo Date', value: 'todo_date' },
+          { text: 'Actions', value: 'actions', sortable: false },
+        ],
+        desserts: [],
+        editedIndex: -1,
+        editedItem: {
+          title: '',
+          description: '',
+          todo_date: '',
+          status: false, 
         },
-        { text: 'Title', value: 'title' },
-        { text: 'Description', value: 'description' },
-        { text: 'Status', value: 'status' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        title: '',
-        description: '',
-        status: ['True','False'], 
-      },
-      defaultItem: {
-        title: '',
-        description: '',
-        status: ['True','False'], 
-      },
-    }),
+        defaultItem: {
+          title: '',
+         description: '',
+         todo_date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
+         status: false, 
+        },
+     }),
 
     computed: {
       formTitle () {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
-    },
-
+      }, 
+    },  
     watch: {
       dialog (val) {
         val || this.close()
@@ -227,44 +281,38 @@
         //this.itemTodo.selectFlag = JSON.parse(this.itemTodo.select.toLowerCase())
         this.desserts  = await Todo.queryAll()
         //console.log(desserts) 
-      },
-      
+      }, 
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
-      },
-
+      }, 
       deleteItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
-      },
-
+      }, 
       async deleteItemConfirm () {
         console.log("Delete")
         const data = await Todo.destroy(this.editedItem.todo_id) 
         console.log(data)
         this.desserts.splice(this.editedIndex, 1)
         this.closeDelete()
-      },
-
+      }, 
       close () {
         this.dialog = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
         })
-      },
-
+      }, 
       closeDelete () {
         this.dialogDelete = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
         })
-      },
-
+      }, 
       async save () {
         console.log("Save") 
         if (this.editedIndex > -1) {
@@ -274,6 +322,7 @@
           console.log(data) 
         } else {
           console.log("Create") 
+          console.log(this.editedItem)
           const data = await Todo.create(this.editedItem)   
           this.editedItem.todo_id = data.data.todo_id
           this.desserts.push(this.editedItem)

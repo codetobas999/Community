@@ -11,6 +11,7 @@ class Todo(Document):
     status: bool = False
     title: Indexed(str)
     description: str = None
+    todo_date: str = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     owner: Link[User]

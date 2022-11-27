@@ -33,6 +33,9 @@ Ref : https://blog.me-idea.in.th/mongodb-docker-compose-up-%E0%B8%9B%E0%B8%B8%E0
    API/AUTH/JWT       -->Service(UserService) --> Model(schema) --> DB
    API/API_V1/Handles --> Service --> Model(schema) --> DB
 
+   Config
+   D:\Forks\github\Community\PROJECTS\proj-cute-pets\backend\app\.env
+
 
 // Create Project 
 python -m venv venv

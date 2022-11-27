@@ -8,6 +8,7 @@ class UserAuth(BaseModel):
     password: str = Field(...,min_length=5 ,max_length=50 ,description="user password")
     first_name: str = Field(...,min_length=1 ,max_length=50 ,description="first name")
     last_name: str  = Field(...,min_length=1 ,max_length=50 ,description="last name")
+    disabled: bool = False
  
 class UserOut(BaseModel):
     user_id: UUID

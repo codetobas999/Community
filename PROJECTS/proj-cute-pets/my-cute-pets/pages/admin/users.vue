@@ -78,7 +78,7 @@
                     </v-col>
                     <v-col cols="12" sm="6" md="4" > 
                       <v-switch
-                         v-model="editedItem.status"
+                         v-model="editedItem.disabled"
                          inset
                          :label="`Status : ${editedItem.disabled.toString()}`"
                       ></v-switch>
@@ -169,8 +169,8 @@
         editedIndex: -1,
         editedItem: {
           email: '',
-          username: '',
-          password: '',
+          //username: '',
+          //password: '',
           first_name: '',
           last_name: '',
           disabled: false, 

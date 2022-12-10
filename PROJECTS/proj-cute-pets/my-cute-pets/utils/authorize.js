@@ -1,11 +1,14 @@
 import { request } from './api'
 
-const HOSTNAME = 'http://127.0.0.1:7000'
+//const HOSTNAME = 'http://127.0.0.1:7000'
+const HOSTNAME = 'http://127.0.0.1:8000'
 
 export async function showMenu() {
-  const url = `${HOSTNAME}/menus` 
+  //const url = `${HOSTNAME}/api/v1/page` 
+  const url = `${HOSTNAME}/api/v1/auth_group` 
   const response = await request('get', url, {}, true) 
   return response.data
+ 
 }
 /*
 export function show(id) {

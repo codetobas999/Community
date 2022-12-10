@@ -1,0 +1,197 @@
+//แสดงฐานข้อมูล 
+show dbs
+
+//สร้าง หรือ เลือกฐานข้อมูล
+ีuse #dbname# 
+//exp : db.mydb
+
+//ลบฐานข้อมูล
+db.#dbname#.drop();
+//exp : db.mydb.drop();
+
+//สร้าง Collection หรือ Table Name
+db.createCollection("#ollectionName#")
+//exp : db.createCollection("users");
+
+//เปลี่ยนชื่อ Collection หรือ Table Name
+db.#CollectionName-old#.renameCollection("#CollectionName-new#")
+//exp : db.users.renameCollection("employees");
+
+//ลบ Collection หรือ Table Name
+db.#CollectionName#.drop();
+//exp : db.employees.drop();
+
+//Data type
+String
+Interger
+Double
+Boolean
+Null
+Object : {}
+Array : []
+ObjectId : จัดเก็บ id ของ document
+Date
+Binary Data
+Max/Min key
+
+$eq  : =       //field:{$eq:value}
+$gt  : >       //field:{$gt:value}
+$gte : >=      //field:{$gte:value}
+$lt  : <       //field:{$lt:value}
+$lte : <=      //field:{$lte:value}
+$ne  : <>      //field:{$ne:value}
+$in  : in      //field:{{$in:[value1,value2...]}}
+$nin : not in  //field:{{$nin:[value1,value2...]}}
+$and : and
+$or  : or
+$nor : ไม่ตรงกับเงื่อนไขใดเลย
+$not : ตรงข้ามกับเงื่อนไขที่กำหนด
+
+//เพิ่มข้อมูลทีละ 1 ข้อมูล(Document)ใน Collection หรือ Table Name
+db.#CollectionName#.insertOne(<#DocumentName#>)
+//exp : db.employees.insertOne({name:"bas",age:40,email:"somsasom@gmail.com"})
+//exp : db.employees.insertOne({name:"bas4",age:40,email:"somsasom@gmail.com" ,social:["line","facebook"]})
+//exp : db.employees.insertOne({name:"bas5",age:40,email:"somsasom@gmail.com" ,social:["line","facebook"],general:{weight:104,height:168,gender:"male"}})
+
+
+//เพิ่มข้อมูลทีละมากกว่า 1 ข้อมูล(Document)ใน Collection หรือ Table Name
+db.#CollectionName#.insertMany([<#DocumentName#>])
+//exp : db.employees.insertMany([{name:"bas2",age:40,email:"somsasom@gmail.com"},{name:"bas3",age:40,email:"somsasom@gmail.com"}])
+
+//Example Data
+/*
+{ 
+  "name": "ก้อง",
+  "salary": 60000,
+  "address": "กรุงเทพมหานคร",
+  "general": {
+    "weight": 60,
+    "height": 170,
+    "gender": "ชาย"
+  },
+  "social": [
+    "facebook",
+    "line",
+    "twitter"
+  ],
+  "department": "ฝ่ายการตลาด"
+}
+*/
+
+//ค้นหาข้อมูล Return Data 1 Row
+db.#CollectionName#.findOne({#condition#})
+//exp : db.employees.findOne({"department":"โปรแกรมเมอร์"})
+
+//ค้นหาข้อมูล Return Data All Row
+db.#CollectionName#.find({#condition#})
+//exp : db.employees.find({"department":"โปรแกรมเมอร์"})
+//exp : db.employees.find({"address":"กรุงเทพมหานคร"})
+//exp : db.employees.find({"salary": 15000})
+//exp : db.employees.find({"address":"กรุงเทพมหานคร" , "salary": 15000})
+//exp : db.employees.find({"address":"ระยอง" , "department":"โปรแกรมเมอร์"})
+//exp : db.employees.find({"general.gender":"ชาย"})
+//exp : db.employees.find({"social":["facebook"]})
+//exp : db.employees.find({"salary":{$eq: 15000}})
+//exp : db.employees.find({"salary":{$gte: 15000} , "salary":{$lte: 40000} }) 
+//exp : db.employees.find({"address":{$nin:["กรุงเทพมหานคร","ระยอง"]}})
+//exp : db.employees.find({$and:[{"salary":{$gt:15000} ,"salary":{$lt:45000}}]})
+//exp : db.employees.find({"general.weight":{$not:{$gte:52}}})
+
+//แก้ไขข้อมูล 1 รายการ
+db.#CollectionName#.updateOne({#filedName#:#value#},{$set:{#filedName#:#value#}})
+//exp : db.employees.updateOne({"name":"สมชาย"},{$set:{"salary":50000 , "general.weight":99 }})
+
+//แก้ไขข้อมูลมากกว่า 1 รายการ
+db.#CollectionName#.updateMany({#filedName#:#value#},{$set:{#filedName#:#value#}})
+//exp : db.employees.updateMany({"address":"กรุงเทพมหานคร"},{$set:{"salary":70000 }})
+
+
+//ลบข้อมูล 1 รายการ
+db.#CollectionName#.deleteOne({#filedName#:#value#})
+//exp : db.employees.deleteOne({"name":"สมชาย"})
+
+//ลบข้อมูลมากกว่า 1 รายการ
+db.#CollectionName#.deleteMany({#filedName#:#value#})
+//exp : db.employees.deleteMany({"address":"กรุงเทพมหานคร"})
+
+
+/*
+{ 
+  "name": "ก้อง",
+  "salary": 60000,
+  "address": "กรุงเทพมหานคร",
+  "general": {
+    "weight": 60,
+    "height": 170,
+    "gender": "ชาย"
+  },
+  "social": [
+    "facebook",
+    "line",
+    "twitter"
+  ],
+  "department": "ฝ่ายการตลาด"
+}
+ */
+//aggregate
+//aggregate(Input --> $project --> $match --> $group --> $sort --> Output)
+//  $project : Select //แสดงเฉพาะข้อมูล Document ที่ต้องการ
+//  $match   : Where  //เอาเฉพาะข้อมูล Document ที่ตรงเงื่อนไข
+//  $group   : Group  //จัดกลุ่มข้อมูล Document
+//  $sort    : Order by //จัดเรียงข้อมูล Document
+//  $lookup  : join     //ดูข้อมูล Document ที่มี Collection ต่างกัน
+//  $limit   : Limit    //จำกัดการแสดงจำนวน Document
+//  $skip    :          //ข้าม Document ตามจำนวนที่ระบุ
+//  $unwind  :          //แยกสมาชิก Field Array ออกเป็น Document 
+//  $count   :          //นับจำนวน Document
+db.#CollectionName#.aggregate([#statge#])
+//exp : db.employees.aggregate()
+
+//  $project
+db.#CollectionName#.aggregate([{$project:{#filedName#:#0:hide/1:show#}}])
+//exp : db.employees.aggregate([{$project:{"_id":0,general:0}}])
+//exp : db.employees.aggregate([{$project:{"_id":0,"name":1,address:1}}])
+
+//  $match
+db.#CollectionName#.aggregate([{$match:{#filedName#:#condition#}}])
+//exp : db.employees.aggregate([{$match:{"salary":{$gt:15000}}}])
+
+//  $count
+db.#CollectionName#.aggregate([{$count:#filedNameDisplay#}}])
+//exp : db.employees.aggregate([ {$match:{"salary":{$eq:15000}}} , {$count:"cnt"} ])
+
+//  $sort 
+db.#CollectionName#.aggregate([{$sort:{#filedName#:#1:Min->Max/-1:Max->Min#}} ])
+//exp : db.employees.aggregate([ {$match:{"salary":{$gt:0}}} , {$sort:{salary:1}} ])
+//exp : db.employees.aggregate([ {$match:{"salary":{$gt:0}}} , {$sort:{name:1}} ])
+
+//  $limit
+db.#CollectionName#.aggregate([{$limit:#จำนวนข้อมูล}])
+//exp : db.employees.aggregate([ {$match:{"salary":{$gt:0}}} , {$limit:3} ])
+
+//  $skip
+db.#CollectionName#.aggregate([{$skip:#จำนวนข้อมูล}])
+//exp : db.employees.aggregate([ {$match:{"salary":{$gt:0}}} , {$skip:3} ])
+
+//  $lookup
+db.#CollectionName#.aggregate([{$lookup:{from:"",localField:"",foreignField:"",as:""}}])
+ 
+
+
+
+//  $group
+// $sum : หาผลรวม Document ภายในกลุ่ม
+// $avg : หาค่าเฉลี่ย Document ภายในกลุ่ม
+// $min : หาค่าต่ำสุด Document ภายในกลุ่ม
+// $max : หาค่าสูงสุด Document ภายในกลุ่ม
+// $first : หา Document อันดับแรกภายในกลุ่ม
+// $last  : หา Document อันดับท้ายภายในกลุ่ม
+// $push : แทรกค่า Array ไปยังผลลัพธ์ในกลุ่ม
+// $addToSet : แทรกค่า Array ไปยังผลลัพธ์ในกลุ่มโดยไม่ซ้ำกัน
+db.#CollectionName#.aggregate([{$group:{#ชื่อฟิลด์สำหรับจัดกลุ่ม#:#ตัวดำเนินการทางสถิติ#} }])
+//exp : db.employees.aggregate([ {$group:{_id:"$department"}} ])
+//expx : db.employees.aggregate([ {$group:{_id:"$department","จำนวน":{$count:{}} }}  ])
+//exp  : db.employees.aggregate([ {$match:{"department":"ฝ่ายขาย"}},{ $group:{ _id:"$department","ยอดรวม":{$sum:"$salary"}} }])
+//exp : db.employees.aggregate([ {$group:{_id:"$department","ยอดรวม":{$sum:"$salary"},"รายละเอียด":{$push:{name:"$name",salary:"$salary"}} }} ])
+//exp : db.employees.aggregate([ {$group:{_id:"$department","ยอดรวม":{$sum:"$salary"},"ข้อมูลพนักงาน":{$addToSet:"$name"} }} ])
+

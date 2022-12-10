@@ -12,8 +12,8 @@
   <v-list nav>
     <v-list-group  
       v-for="menu in my_menus"
-      :key="menu.title"
-      :prepend-icon="`${menu.icon + menuClass(menu)}`"
+      :key="menu.page.menu_name_th"
+      :prepend-icon="`${menu.page.icon + menuClass(menu)}`"
       no-action
       :value="menu.active" 
       active-class="grey--text text--darken-2"
@@ -21,17 +21,17 @@
       <template v-slot:activator>
         <v-list-item-content :class="menuClass(menu)" >
           <v-list-item-title
-            v-text="menu.title"
+            v-text="menu.page.menu_name_th"
             class="font-weight-medium" 
           ></v-list-item-title>
         </v-list-item-content>
       </template>
 
       <v-list-item
-        v-for="(item, i) in menu.pages"
+        v-for="(item, i) in menu.page_subs"
         v-model="item.active"
         :key="i"
-        :value="item.title"
+        :value="item.menu_sub_name_th"
         :to="item.to"
         :disabled="item.disabled"
         router
@@ -41,7 +41,7 @@
           <v-icon v-text="item.icon" small></v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
+          <v-list-item-title v-text="item.menu_sub_name_th" />
         </v-list-item-content>
       </v-list-item>
     </v-list-group>
@@ -171,8 +171,8 @@ export default {
         //console.log('menu', data)
       },
       menuClass(menu) {
-       return menu.pages &&
-         menu.pages.some((item) => this.$route.path.includes(item.to)) 
+       return menu.page_subs &&
+         menu.page_subs.some((item) => this.$route.path.includes(item.to)) 
          ? ' primary--text'
          : ' grey--text text--darken-2' 
       },

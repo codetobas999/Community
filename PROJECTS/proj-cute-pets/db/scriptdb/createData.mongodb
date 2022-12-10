@@ -1,0 +1,92 @@
+// Select the database to use.
+//icon : https://pictogrammers.github.io/@mdi/font/1.1.34/
+//       http://www.rotobaisa.com/mdi-icons.html
+use('cutepet-demo-db');
+ 
+db.Page.drop();
+ 
+db.Page.insertMany([
+  {'page_code':'P010000', 'menu_name_en': '', 'menu_name_th': 'หน้าแรก','icon': 'mdi-apps', 'to': '/sss','status':true},
+  {'page_code':'P020000', 'menu_name_en': '', 'menu_name_th': 'บทความ','icon': 'mdi-pencil','to': '/','status':true},
+  {'page_code':'P030000', 'menu_name_en': '', 'menu_name_th': 'ผู้เขียน','icon': 'mdi-account-multiple','to': '/','status':true},
+  {'page_code':'P040000', 'menu_name_en': '', 'menu_name_th': 'ข้อมูลลูกค้า','icon': 'mdi-account-outline','to': '/','status':true},
+  {'page_code':'P050000', 'menu_name_en': '', 'menu_name_th': 'ตารางนัดหมาย','icon': 'mdi-timetable','to': '/','status':true},
+  {'page_code':'P060000', 'menu_name_en': '', 'menu_name_th': 'กิจกรรม','icon': 'mdi-image-multiple','to': '/','status':true},
+  {'page_code':'P070000', 'menu_name_en': '', 'menu_name_th': 'Demo','icon': 'mdi-cow','to': '/','status':true},
+  {'page_code':'P080000', 'menu_name_en': '', 'menu_name_th': 'คลังยา','icon': 'mdi-needle','to': '/','status':true},
+  {'page_code':'P090000', 'menu_name_en': '', 'menu_name_th': 'หน้าแรก','icon': 'mdi-account-key', 'to': '/sss','status':false},
+  {'page_code':'P100000', 'menu_name_en': '', 'menu_name_th': 'สิ่งที่ต้องทำ','icon': 'mdi-checkbox-marked-outline','to': '/','status':true},
+  {'page_code':'P999999', 'menu_name_en': '', 'menu_name_th': 'Admn','icon': 'mdi mdi-anchor','to': '/','status':true},
+]);
+
+use('cutepet-demo-db');
+
+db.PageSub.drop();
+
+db.PageSub.insertMany([
+  {'page_code':'P020000', 'page_sub_code':'P0201', 'menu_sub_name_en': '', 'menu_sub_name_th': 'บทความ1', 'icon': 'mdi-format-list-checks', 'to': '/','status':true},
+  {'page_code':'P020000', 'page_sub_code':'P0202', 'menu_sub_name_en': '', 'menu_sub_name_th': 'บทความ2', 'icon': 'mdi-format-list-checks', 'to': '/','status':true},
+  {'page_code':'P030000', 'page_sub_code':'P0301', 'menu_sub_name_en': '', 'menu_sub_name_th': 'ผู้เขียน1', 'icon': 'mdi-format-list-checks', 'to': '/','status':true},
+  {'page_code':'P030000', 'page_sub_code':'P0301', 'menu_sub_name_en': '', 'menu_sub_name_th': 'ผู้เขียน2', 'icon': 'mdi-format-list-checks', 'to': '/','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0401', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ1', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info0','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0402', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ2', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info1','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0403', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ3', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info2','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0404', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ4', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info3','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0405', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ5', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info4','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0406', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ6', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info5','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0407', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ7', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info6','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0408', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ8', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info7','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0409', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ9', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info8','status':true},
+  {'page_code':'P040000', 'page_sub_code':'P0410', 'menu_sub_name_en': '', 'menu_sub_name_th': 'แก้ไขประวัติ10', 'icon': 'mdi-format-list-checks', 'to': '/registers/customer_info9','status':true},
+  {'page_code':'P050000', 'page_sub_code':'P0501', 'menu_sub_name_en': '', 'menu_sub_name_th': 'ดูนัดหมาย', 'icon': 'mdi-format-list-checks', 'to': '/appointments','status':true},
+  {'page_code':'P050000', 'page_sub_code':'P0502', 'menu_sub_name_en': '', 'menu_sub_name_th': 'ดูนัดหมาย2', 'icon': 'mdi-format-list-checks', 'to': '/appointments/apppintment_2','status':true}, 
+  {'page_code':'P060000', 'page_sub_code':'P0601', 'menu_sub_name_en': '', 'menu_sub_name_th': 'ดูกิจกรรม', 'icon': 'mdi-format-list-checks', 'to': '/activitys','status':true},
+  {'page_code':'P070000', 'page_sub_code':'P0701', 'menu_sub_name_en': '', 'menu_sub_name_th': 'Demo', 'icon': 'mdi-format-list-checks', 'to': '/demo','status':true},
+  {'page_code':'P080000', 'page_sub_code':'P0801', 'menu_sub_name_en': '', 'menu_sub_name_th': 'Store', 'icon': 'mdi-format-list-checks', 'to': '/stores','status':true},
+  {'page_code':'P090000', 'page_sub_code':'P0901', 'menu_sub_name_en': '', 'menu_sub_name_th': 'สร้าง', 'icon': 'mdi-format-list-checks', 'to': '/todo/create','status':true},
+  {'page_code':'P090000', 'page_sub_code':'P0902', 'menu_sub_name_en': '', 'menu_sub_name_th': 'สร้าง2', 'icon': 'mdi-format-list-checks', 'to': '/todo/todo1','status':false},
+  {'page_code':'P100000', 'page_sub_code':'P1001', 'menu_sub_name_en': '', 'menu_sub_name_th': 'User', 'icon': 'mdi-format-list-checks', 'to': '/admin/users','status':true},
+  {'page_code':'P999999', 'page_sub_code':'P9901', 'menu_sub_name_en': '', 'menu_sub_name_th': 'User Info', 'icon': 'mdi-format-list-checks', 'to': '/admin/users','status':true},
+]);
+
+-------------------------------------
+use('cutepet-demo-db');
+
+db.Page.aggregate([{
+  $lookup: {
+    from: 'PageSub',
+    localField: 'page_code',
+    foreignField: 'page_code',
+    as: 'pages'
+  },
+  { $project : { '_id': 0, 'pages._id': 0 }  },
+}])
+
+db.Page.aggregate([
+  {
+    $lookup: {
+      from: 'PageSub',
+      localField: 'page_code',
+      foreignField: 'page_code',
+      as: 'pages'
+    },
+  },
+  {
+    $project : { 
+      _id: 0,
+      pages:{_id: 0}  
+    },
+  }  , 
+  {
+    $match: {    
+        $expr:{ $in: ["P0902", "$pages.page_sub_code"]}     
+    } 
+  },{
+     $match: {    
+         'pages.page_sub_code': "P0202"
+    } 
+  }
+
+])
+
+ 

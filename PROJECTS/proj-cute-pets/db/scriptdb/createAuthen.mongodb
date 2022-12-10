@@ -73,12 +73,33 @@ db.AuthUserGroup.insertMany([
 ]);
 
 -------------------------------------
-use('cutepet-demo-db');
-db.auth_group.aggregate([
-  {$match:{"group_code":{$eq:'G0001'}}},
+use('cutepet-demo-db'); 
+db.AuthGroup.aggregate([
+  //{$match:{"group_code":{$in:['G0002','G0002']}}},
   {
     $lookup: {
-      from: "auth_page",
+      from: "AuthUserGroup",
+      let:{groupCode : "$group_code"},
+      pipeline:[
+        { 
+          $match: {
+                $expr: { 
+                  $and: [
+                      { $eq: ["$group_code", "$$groupCode"]}, 
+                      { $eq: ["$user_code", "user999"]}
+                  ]                         
+                }
+          }
+        },   
+      ],
+      as: "group"  
+    },
+  } ,
+  { $unwind: "$group" },
+   
+  {
+    $lookup: {
+      from: "AuthPage",
       let:{pageCode : "$page_code"},
       pipeline:[
         { 
@@ -94,13 +115,12 @@ db.auth_group.aggregate([
   { $unwind: "$page" },
   {
     $lookup: {
-      from: "auth_page_sub",
+      from: "AuthPageSub",
       let: {pageCode:"$page_code" , pageSubCode:"$page_sub_code" },
       pipeline: [
         {
             $match: {
-                $expr: {
-                  //$eq: ["$group_code", "$$groupCode"]
+                $expr: { 
                   $and: [
                       { $eq: ["$page_code", "$$pageCode"]},
                       { $in: ["$page_sub_code", "$$pageSubCode"]},
@@ -112,81 +132,8 @@ db.auth_group.aggregate([
       ],
       as: "page_subs" 
     },          
-}, 
-//{ $project : { _id :0, page:1, page2 : 1}}, 
-{ $unset: [ "_id" , "group_code" ,"page_code" ,"page_sub_code" ,"status", "page._id", "page_subs._id"    ] },
+},  
+{ $unset: [ "_id"  ,"page_code" ,"page_sub_code" ,"status", "page._id", "page_subs._id"    ] },
  
-//{ $project : { _id :0, page:{_id :0} , page2 : 1}}, 
-  //{ $unwind: "$page" },
-  //{ $project : { _id :0, page : 1}}, 
-  
-  
-])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-use('cutepet-demo-db');
-db.auth_user_group.aggregate([
-  {$match:{"user_code":{$eq:'somsasom'}}},
-  {
-    $lookup: {
-      from: "auth_page_group",
-      let:{groupCode : "$group_code"},
-      pipeline:[
-        { 
-          $match: {
-              $expr: { $eq: ["$group_code", "$$groupCode"] }
-          }
-        },
-        {
-          $lookup: {
-            from: "auth_page_sub_group",
-            let:{groupCode:"$group_code" , pageCode:"$page_code"},
-            pipeline: [
-              {
-                  $match: {
-                      $expr: {
-                        //$eq: ["$group_code", "$$groupCode"]
-                        $and: [
-                            {$eq: ["$group_code", "$$groupCode"]},
-                            {$eq: ["$page_code", "$$pageCode"]}
-                        ]                         
-                      }
-                  }
-              },
-            ],
-            as: "pages" 
-          },          
-        },
-        //{ $unwind: "$page_sub" },
-        //{ $project : {_id :0, page_sub :1}}, 
-        
-      ],
-      as: "page" 
-     
-    },
-    
-    //
-  } ,
-  //{ $unwind: "$page" },
-  //{ $project : { _id :0, page : 1}}, 
-  
   
 ])

@@ -7,7 +7,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.models.user_model import User
 from app.models.todo_model import Todo
 from app.models.page_model import Page 
-from app.models.auth_group_model import AuthGroup
+from app.models.auth_page_model import AuthPage 
+from app.models.auth_page_sub_model import AuthPageSub 
+from app.models.auth_group_model import AuthGroup 
+from app.models.auth_user_group_model import AuthUserGroup
 from app.api.api_v1.router import router
 
 app = FastAPI(
@@ -33,8 +36,13 @@ async def app_init():
     await init_beanie(        
         database=db_client[settings.DB_NAME],
         document_models=[
-            AuthGroup,
             User,
+
+            AuthPage,
+            AuthPageSub,
+            AuthGroup,
+            AuthUserGroup,
+            
             Todo,
             Page,
             

@@ -2,31 +2,31 @@ from uuid import UUID
 from fastapi import APIRouter , Depends
 from app.models.user_model import User
 from app.api.deps.user_deps import get_current_user
-from app.schemas.todo_schema import TodoOut , TodoCreate ,TodoUpdate
-from app.services.todo_service import TodoService
-from app.models.todo_model import Todo
+from app.schemas.auth_page_sub_schema import AuthPageSubOut, AuthPageSubCreate , AuthPageSubUpdate 
+from app.services.auth_page_sub_service import AuthPageSubService
+from app.models.auth_page_sub_model import AuthPageSub
 from typing import List
 
-todo_router = APIRouter()
+auth_page_sub_router = APIRouter()
 
-@todo_router.get('/',summary="Get all todos of the user",response_model=List[TodoOut])
+@auth_page_sub_router.get('/',summary="Get all Auth Page Sub all",response_model=List[AuthPageSubOut])
 async def list(current_user: User =  Depends(get_current_user)):
-    return await TodoService.list_todos(current_user)
+    return await AuthPageSubService.list_authPageSubs(current_user)
 
 
-@todo_router.post('/create',summary="Create todo",response_model=Todo)
-async def create_todo(data: TodoCreate , current_user: User =  Depends(get_current_user)):
-    return await TodoService.create_todo(current_user,data)
+@auth_page_sub_router.post('/create',summary="Create Auth Page Sub",response_model=AuthPageSub)
+async def create_auth_page_sub(data: AuthPageSubCreate , current_user: User =  Depends(get_current_user)):
+    return await AuthPageSubService.create_authPageSubs(current_user,data)
 
-@todo_router.get('/{todo_id}',summary="Get a todo by todo_id",response_model=TodoOut)
-async def retrieve(todo_id: UUID , current_user: User =  Depends(get_current_user)):
-    return await TodoService.retrieve_todo(current_user,todo_id)
+@auth_page_sub_router.get('/{auth_page_sub_id}',summary="Get a Auth Page Sub by auth_page_sub_id",response_model=AuthPageSubOut)
+async def retrieve(auth_page_sub_id: UUID , current_user: User =  Depends(get_current_user)):
+    return await AuthPageSubService.retrieve_authPageSub(current_user,auth_page_sub_id)
  
-@todo_router.put('/{todo_id}',summary="Update todo by todo_id",response_model=TodoOut)
-async def update(todo_id: UUID , data: TodoUpdate ,current_user: User =  Depends(get_current_user)):
-    return await TodoService.update_todo(current_user,todo_id,data)
+@auth_page_sub_router.put('/{auth_page_sub_id}',summary="Update Auth Page Sub by auth_page_sub_id",response_model=AuthPageSubOut)
+async def update(auth_page_sub_id: UUID , data: AuthPageSubUpdate ,current_user: User =  Depends(get_current_user)):
+    return await AuthPageSubService.update_authPageSubs(current_user,auth_page_sub_id,data)
 
-@todo_router.delete('/{todo_id}',summary="Delete todo by todo_id")
-async def delete(todo_id: UUID ,current_user: User =  Depends(get_current_user)):
-    await TodoService.delete_todo(current_user,todo_id)    
+@auth_page_sub_router.delete('/{auth_page_sub_id}',summary="Delete Auth Page Sub by auth_page_sub_id")
+async def delete(auth_page_sub_id: UUID ,current_user: User =  Depends(get_current_user)):
+    await AuthPageSubService.delete_authPageSubs(current_user,auth_page_sub_id)    
     return None

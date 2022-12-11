@@ -1,37 +1,38 @@
 from typing import List
 from uuid import UUID
 from app.models.user_model import User
-from app.models.todo_model import Todo
-from app.schemas.todo_schema import TodoCreate ,TodoUpdate
+from app.models.auth_page_sub_model import AuthPageSub
+from app.schemas.auth_page_sub_schema import AuthPageSubCreate , AuthPageSubUpdate 
 
 
-class TodoService:
+class AuthPageSubService:
     @staticmethod
-    async def list_todos(user: User)-> List[Todo]:
-        todos = await Todo.find(Todo.owner.id == user.id).to_list()
-        return todos
+    async def list_authPageSubs(user: User)-> List[AuthPageSub]:
+        authPageSubs = await AuthPageSub.find({}).to_list()
+        return authPageSubs
          
+     
+    @staticmethod
+    async def create_authPageSubs(user: User, data: AuthPageSubCreate)-> AuthPageSub: 
+        authPageSub = AuthPageSub(**data.dict(), owner=user)
+        return await authPageSub.insert()        
+    
+    @staticmethod
+    async def retrieve_authPageSub(current_user: User, auth_page_sub_id: UUID): 
+        authPageSub = await AuthPageSub.find_one(AuthPageSub.auth_page_sub_id == auth_page_sub_id )
+        return authPageSub
 
     @staticmethod
-    async def create_todo(user: User, data: TodoCreate)-> Todo: 
-        todo = Todo(**data.dict(), owner=user)
-        return await todo.insert()        
+    async def update_authPageSubs(current_user: User, auth_page_sub_id: UUID ,data: AuthPageSubUpdate): 
+        authPageSub = await AuthPageSubService.retrieve_authPageSub(current_user,auth_page_sub_id)
+        await authPageSub.update({"$set": data.dict(exclude_unset=True)})
+        await authPageSub.save()
+        return authPageSub   
 
     @staticmethod
-    async def retrieve_todo(current_user: User, todo_id: UUID): 
-        todo = await Todo.find_one(Todo.todo_id == todo_id ,Todo.owner.id == current_user.id)
-        return todo
-
-    @staticmethod
-    async def update_todo(current_user: User, todo_id: UUID ,data: TodoUpdate): 
-        todo = await TodoService.retrieve_todo(current_user,todo_id)
-        await todo.update({"$set": data.dict(exclude_unset=True)})
-        await todo.save()
-        return todo   
-
-    @staticmethod
-    async def delete_todo(current_user: User, todo_id: UUID)-> None:
-        todo = await TodoService.retrieve_todo(current_user,todo_id)
-        if todo:
-            await todo.delete() 
+    async def delete_authPageSubs(current_user: User, auth_page_sub_id: UUID)-> None:
+        authPageSub = await AuthPageSubService.retrieve_authPageSub(current_user,auth_page_sub_id)
+        if authPageSub:
+            await authPageSub.delete() 
         return None         
+    

@@ -97,58 +97,7 @@ export default {
           (v && v.length >= 4 && v.length <= 60) ||
           'Your password must contain between 4 and 60 characters.',
       ],
-      //my_authorize: [
-      /*my_menus: [  
-        // { icon: 'mdi-apps', title: 'Welcome', to: '/' },
-        // { icon: 'mdi-chart-bubble', title: 'Inspire', to: '/inspire' },
-            {id:1000, name:"หน้าแรก", title: 'หน้าแรก',icon: 'mdi-apps', to: '/sss',isAuthen:true,
-             pages: []  
-            },
-            {id:2000, name:"บทความ", title: 'บทความ',icon: 'mdi-chart-bubble',to: '/',isAuthen:true, 
-            pages: [ {id:2001, title: 'บทความ1', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                     {id:2002, title: 'บทความ2', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                    ]  
-            },    
-            {id:3000, name:"ผู้เขียน", title: 'ผู้เขียน',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:3001, title: 'ผู้เขียน1', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                     {id:3002, title: 'ผู้เขียน2', icon: 'mdi-format-list-checks', to: '/',isAuthen:true},
-                    ]  
-            },
-            {id:4000, name:"ข้อมูลลูกค้า", title: 'ข้อมูลลูกค้า',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:4001, title: 'เพิ่มประวัติ', icon: 'mdi-format-list-checks', to: '/registers',isAuthen:true},
-                     {id:4002, title: 'แก้ไขประวัติ', icon: 'mdi-format-list-checks', to: '/registers/customer_info',isAuthen:true},
-                     {id:4003, title: 'แก้ไขประวัติ2', icon: 'mdi-format-list-checks', to: '/registers/customer_info2',isAuthen:true},
-                    ]  
-            }, 
-            {id:5000, name:"ตารางนัดหมาย", title: 'ตารางนัดหมาย',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:5001, title: 'ดูนัดหมาย', icon: 'mdi-format-list-checks', to: '/appointments',isAuthen:true}, 
-                   ]  
-            },     
-            {id:6000, name:"กิจกรรม", title: 'กิจกรรม',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:6001, title: 'ดูกิจกรรม', icon: 'mdi-format-list-checks', to: '/activitys',isAuthen:true}, 
-                   ]  
-            },  
-            {id:7000, name:"Demo", title: 'Demo',icon: 'mdi-database',to: '/',isAuthen:true, 
-            pages: [ {id:6001, title: 'Demo', icon: 'mdi-format-list-checks', to: '/demo',isAuthen:true}, 
-                   ]  
-            },                     
-      ],
-      my_authorizes: [
-            {id:2001, name:"กิจกรรม1",
-             components: [ {code:"search"},
-                           {code:"create"},
-                           {code:"edit"},
-                           {code:"delete"},
-                         ],  
-            },
-            {id:2002, name:"กิจกรรม2",
-             components: [ {code:"search"},
-                           {code:"create"},
-                           {code:"edit"},
-                           {code:"delete"},
-                         ],  
-            }, 
-      ],*/
+
     }
   },
   methods: {

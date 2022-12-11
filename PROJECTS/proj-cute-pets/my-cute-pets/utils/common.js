@@ -1,4 +1,4 @@
-import { showMenu } from './authorize'
+import { showMenu } from './permission'
 
 export function writelog(message,level = 0) {
   console.log("writelog[" + level + "] : " + message )

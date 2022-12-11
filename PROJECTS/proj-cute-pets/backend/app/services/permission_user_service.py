@@ -1,5 +1,5 @@
-from app.models.auth_group_model import AuthGroup  ,AuthUserGroup
- 
+from app.models.auth_group_model import AuthGroup 
+from app.models.auth_user_group_model import AuthUserGroup
 
 class AuthGroupService:
     @staticmethod
@@ -13,7 +13,7 @@ class AuthGroupService:
                             "$match": {
                                 "$expr": {
                                     "$and": [
-                                            { "$eq": ["$group_code", "$$groupCode"]}, 
+                                            { "$eq": ["$group_code", "$$groupCode"]},  
                                             { "$eq": ["$user_code", user_code]}
                                     ]            
                                 }
@@ -62,7 +62,7 @@ class AuthGroupService:
         stage_hide_fiels = { "$unset": [ "_id" , "group_code" ,"page_code" ,"page_sub_code" ,"status", "page._id", "page_subs._id"    ] }                
         stage_unarray_page = { "$unwind": "$page" }
         stage_unarray_group = { "$unwind": "$group" }
-        stage_field_filter = { "$project" : { "_id": 0 , "group._id": 0 , "pages._id": 0 , "page_subs._id": 0 }  } #hide Column
+        stage_field_filter = { "$project" : { "_id": 0 , "group._id": 0 , "group.auth_user_id": 0 , "pages._id": 0 , "page_subs._id": 0 }  } #hide Column
         pipeline = [
             stage_lookup_AuthUser,
             stage_unarray_group,

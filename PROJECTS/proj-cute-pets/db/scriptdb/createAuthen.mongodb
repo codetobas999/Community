@@ -43,6 +43,9 @@ db.AuthPageSub.insertMany([
   {'page_code':'P090000', 'page_sub_code':'P0902', 'menu_sub_name_en': '', 'menu_sub_name_th': 'สร้าง2', 'icon': 'mdi-format-list-checks', 'to': '/todo/todo1','status':false},
   {'page_code':'P100000', 'page_sub_code':'P1001', 'menu_sub_name_en': '', 'menu_sub_name_th': 'User', 'icon': 'mdi-format-list-checks', 'to': '/admin/users','status':true},
   {'page_code':'P999999', 'page_sub_code':'P9901', 'menu_sub_name_en': '', 'menu_sub_name_th': 'User Info', 'icon': 'mdi-format-list-checks', 'to': '/admin/users','status':true},
+  {'page_code':'P999999', 'page_sub_code':'P9902', 'menu_sub_name_en': '', 'menu_sub_name_th': 'User Group Info', 'icon': 'mdi-format-list-checks', 'to': '/admin/auth_user_group','status':true},
+  {'page_code':'P999999', 'page_sub_code':'P9903', 'menu_sub_name_en': '', 'menu_sub_name_th': 'User Page Info', 'icon': 'mdi-format-list-checks', 'to': '/admin/auth_page','status':true},
+  {'page_code':'P999999', 'page_sub_code':'P9904', 'menu_sub_name_en': '', 'menu_sub_name_th': 'User Page Sub Info', 'icon': 'mdi-format-list-checks', 'to': '/admin/auth_page_sub','status':true},
 ]);
 
 use('cutepet-demo-db');
@@ -58,12 +61,13 @@ db.AuthGroup.insertMany([
   {'group_code':'G0001', 'page_code': 'P080000', 'page_sub_code': ['P0801'] ,'status':true},
   {'group_code':'G0001', 'page_code': 'P090000', 'page_sub_code': ['P0901','P0902'] ,'status':true},
   {'group_code':'G0001', 'page_code': 'P100000', 'page_sub_code': ['P1001'] ,'status':true},
-  {'group_code':'G0001', 'page_code': 'P999999', 'page_sub_code': ['P9901'] ,'status':true},
+  {'group_code':'G0001', 'page_code': 'P999999', 'page_sub_code': ['P9901','P9902','P9903','P9904'] ,'status':true},
 
   {'group_code':'G0002', 'page_code': 'P010000', 'page_sub_code': [] ,'status':true},
   {'group_code':'G0002', 'page_code': 'P020000', 'page_sub_code': ['P0201','P0202'] ,'status':true},
   {'group_code':'G0002', 'page_code': 'P040000', 'page_sub_code': ['P0401','P0402'] ,'status':true}, 
 ]);
+ 
  
 use('cutepet-demo-db');
 db.AuthUserGroup.drop();
@@ -134,6 +138,6 @@ db.AuthGroup.aggregate([
     },          
 },  
 { $unset: [ "_id"  ,"page_code" ,"page_sub_code" ,"status", "page._id", "page_subs._id"    ] },
- 
+{ $project : { "_id": 0 , "group._id": 0 , "group.auth_user_id": 0 , "pages._id": 0 , "page_subs._id": 0 }  } 
   
 ])

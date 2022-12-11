@@ -1,39 +1,37 @@
-from typing import Optional
 from datetime import datetime
 from uuid import UUID ,uuid4
-from beanie import Document , Indexed , Link , before_event , Replace , Insert
+from beanie import Document , Indexed  , before_event , Replace , Insert
 from pydantic import Field
 from .user_model import User
- 
 
-class Todo(Document):
-    todo_id: UUID = Field(default_factory=uuid4, unique=True)
-    status: bool = False
-    title: Indexed(str)
-    description: str = None
-    todo_date: str = None
+class AuthPage(Document):
+    auth_page_id: UUID = Field(default_factory=uuid4, unique=True)
+    page_code: Indexed(str)
+    menu_name_en: str = None
+    menu_name_th: str = None
+    icon: str = None
+    to: str = None
+    status: bool = False 
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
-    owner: Link[User]
 
     def __repr__(self) -> str:
-        return f"<Todo {self.title}>"
+        return f"<AuthPage {self.page_code}>"
 
     def __str__(self) -> str:
-        return self.title
+        return self.page_code
 
     def __hash__(self) -> int:
-        return hash(self.title)
+        return hash(self.page_code)
 
     def __eq__(self , other: object) -> bool:
-        if isinstance(other,Todo):
-            return self.todo_id == other.todo_id
+        if isinstance(other,AuthPage):
+            return self.auth_page_id == other.auth_page_id
         return False
  
     @before_event([Replace,Insert])
     def update_updated_at(self):
         self.updated_at= datetime.utcnow()
 
-    
     class Collection:
-        name = "todo"
+        name = "auth_page"

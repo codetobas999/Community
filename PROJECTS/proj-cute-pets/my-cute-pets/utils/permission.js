@@ -5,7 +5,7 @@ const HOSTNAME = 'http://127.0.0.1:8000'
 
 export async function showMenu() {
   //const url = `${HOSTNAME}/api/v1/page` 
-  const url = `${HOSTNAME}/api/v1/auth_group` 
+  const url = `${HOSTNAME}/api/v1/permission_user` 
   const response = await request('get', url, {}, true) 
   return response.data
  

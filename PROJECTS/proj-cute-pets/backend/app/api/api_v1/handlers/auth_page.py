@@ -2,31 +2,31 @@ from uuid import UUID
 from fastapi import APIRouter , Depends
 from app.models.user_model import User
 from app.api.deps.user_deps import get_current_user
-from app.schemas.todo_schema import TodoOut , TodoCreate ,TodoUpdate
-from app.services.todo_service import TodoService
-from app.models.todo_model import Todo
+from app.schemas.auth_page_schema import AuthPageOut, AuthPageCreate , AuthPageUpdate 
+from app.services.auth_page_service import AuthPageService
+from app.models.auth_page_model import AuthPage
 from typing import List
 
-todo_router = APIRouter()
+auth_page_router = APIRouter()
 
-@todo_router.get('/',summary="Get all todos of the user",response_model=List[TodoOut])
+@auth_page_router.get('/',summary="Get all Auth Page all",response_model=List[AuthPageOut])
 async def list(current_user: User =  Depends(get_current_user)):
-    return await TodoService.list_todos(current_user)
+    return await AuthPageService.list_authPages(current_user)
 
 
-@todo_router.post('/create',summary="Create todo",response_model=Todo)
-async def create_todo(data: TodoCreate , current_user: User =  Depends(get_current_user)):
-    return await TodoService.create_todo(current_user,data)
+@auth_page_router.post('/create',summary="Create Auth Page",response_model=AuthPage)
+async def create_auth_page(data: AuthPageCreate , current_user: User =  Depends(get_current_user)):
+    return await AuthPageService.create_authPages(current_user,data)
 
-@todo_router.get('/{todo_id}',summary="Get a todo by todo_id",response_model=TodoOut)
-async def retrieve(todo_id: UUID , current_user: User =  Depends(get_current_user)):
-    return await TodoService.retrieve_todo(current_user,todo_id)
+@auth_page_router.get('/{auth_page_id}',summary="Get a Auth Page by auth_page_id",response_model=AuthPageOut)
+async def retrieve(auth_page_id: UUID , current_user: User =  Depends(get_current_user)):
+    return await AuthPageService.retrieve_authPage(current_user,auth_page_id)
  
-@todo_router.put('/{todo_id}',summary="Update todo by todo_id",response_model=TodoOut)
-async def update(todo_id: UUID , data: TodoUpdate ,current_user: User =  Depends(get_current_user)):
-    return await TodoService.update_todo(current_user,todo_id,data)
+@auth_page_router.put('/{auth_page_id}',summary="Update Auth Page by auth_page_id",response_model=AuthPageOut)
+async def update(auth_page_id: UUID , data: AuthPageUpdate ,current_user: User =  Depends(get_current_user)):
+    return await AuthPageService.update_authPages(current_user,auth_page_id,data)
 
-@todo_router.delete('/{todo_id}',summary="Delete todo by todo_id")
-async def delete(todo_id: UUID ,current_user: User =  Depends(get_current_user)):
-    await TodoService.delete_todo(current_user,todo_id)    
+@auth_page_router.delete('/{auth_page_id}',summary="Delete Auth Page by auth_page_id")
+async def delete(auth_page_id: UUID ,current_user: User =  Depends(get_current_user)):
+    await AuthPageService.delete_authPages(current_user,auth_page_id)    
     return None

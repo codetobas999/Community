@@ -67,6 +67,7 @@
 <script>
 import { mapActions } from 'vuex'
 import Logobar from '@/components/Globals/Logobar' 
+import * as SettingApp from '@/utils/settingApp'
 export default {
   components: {
       Logobar
@@ -75,6 +76,12 @@ export default {
   auth: false,
   data() {
     return {
+      mySettingApp:{
+                  language:"EN",
+                  theme:"default",
+                  show_page:-1,
+                  token_age:60
+      },
       login: {
         username: '',
         password: '',
@@ -111,13 +118,13 @@ export default {
       this.$refs.form.resetValidation()
       this.clearAlert()
       this.isLoading = true
-      this.menus = this.my_menus//กำหนดสิทธิ์การเข้า Menu
+      //this.menus = this.my_menus//กำหนดสิทธิ์การเข้า Menu
  
       await this.$auth
         /*.loginWith('local', { data: this.login })*/
         .loginWith('local', {data:`username=${this.login.username}&password=${this.login.password}`})
-        .then((response) => {
-          console.log(response)
+        .then((response) => {   
+          console.log(response)  
           // redirect page
           let path = this.$auth.$storage.getUniversal('redirect') || '/'
           this.$auth.$storage.setUniversal('redirect', null)
@@ -139,9 +146,13 @@ export default {
           this.isLoading = false
         })*/
 
-
-
+      console.log("--------------")
+      //this.settingApp = this.mySettingApp
+      this.settingApp = await SettingApp.queryByUser()//this.mySettingApp
+      console.log("--------------")  
       console.log("userLogin : " +  this.login.username +'/' + this.login.password)
+      console.log("show_page1 : " +  this.settingApp.show_page)
+      //console.log("show_page2 : " +  this.$store.state.setting_app.show_page)
       this.isLoading = true
       this.$router.push('/')
       //this.$router.push('redirect')
@@ -182,6 +193,16 @@ export default {
     */
   },
   computed: {
+    settingApp: {
+        get() {
+          //console.log('get_settingApps' + this.$store.state.setting_app)  
+          return this.$store.state.setting_app
+        },
+        set(newVal) {
+          //console.log('set_settingApp' + newVal) 
+          this.$store.commit('set_settingApp', newVal)
+        }
+      },
     /*menus: {
         get() {
           console.log('get_menus' + this.$store.state.menus)  

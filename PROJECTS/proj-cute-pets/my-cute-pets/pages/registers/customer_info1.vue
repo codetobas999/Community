@@ -1,8 +1,10 @@
 <template>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="desserts"       
       sort-by="calories"
+      :items-per-page= this.settingApp.show_page
+      :rows-per-page= this.settingApp.show_page
       class="elevation-1"
     >
       <template v-slot:top>
@@ -156,8 +158,8 @@
         layout:"main" ,
         middleware: 'auth',
         data: () => ({
-      dialog: false,
-      dialogDelete: false,
+        dialog: false,
+        dialogDelete: false,
       headers: [
         {
           text: 'Dessert (100g serving)',
@@ -170,7 +172,7 @@
         { text: 'Carbs (g)', value: 'carbs' },
         { text: 'Protein (g)', value: 'protein' },
         { text: 'Actions', value: 'actions', sortable: false },
-      ],
+      ], 
       desserts: [],
       editedIndex: -1,
       editedItem: {
@@ -192,7 +194,13 @@
     computed: {
       formTitle () {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
+      }, 
+      settingApp: {
+        get() {
+          console.log('get_settingApps' + this.$store.state.setting_app.show_page)  
+          return this.$store.state.setting_app
+        },  
+      }
     },
 
     watch: {

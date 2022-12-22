@@ -1,4 +1,10 @@
   export const state = () => ({
+    setting_app:{
+                  language:"",
+                  theme:"default",
+                  show_page:0,
+                  token_age:15
+                },
     //myState: 'Hello',
     //toggle_menu: false,
     //menus: [],            //Authorize Main Menu 
@@ -30,5 +36,9 @@
     set_fixed(state, newFixedState) {
       //console.log('STORE (SETTING FIXED TO)', newFixedState)
       state.fixed = newFixedState
+    },
+    set_settingApp(state, newsettingApp) {
+      console.log('STORE (SETTING APP)', newsettingApp)
+      state.setting_app = newsettingApp
     }
   }

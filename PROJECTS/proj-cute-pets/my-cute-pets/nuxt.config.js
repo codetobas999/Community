@@ -125,7 +125,7 @@ export default {
       }
     },
     redirect: {
-      login: '/login'
+      login: '/login' 
     }
   },
   

@@ -11,6 +11,7 @@ from app.models.auth_page_model import AuthPage
 from app.models.auth_page_sub_model import AuthPageSub 
 from app.models.auth_group_model import AuthGroup 
 from app.models.auth_user_group_model import AuthUserGroup
+from app.models.setting_app_by_user_model import SettingAppByUser
 from app.api.api_v1.router import router
 
 app = FastAPI(
@@ -42,6 +43,7 @@ async def app_init():
             AuthPageSub,
             AuthGroup,
             AuthUserGroup,
+            SettingAppByUser,
             
             Todo,
             Page,

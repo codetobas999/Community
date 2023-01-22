@@ -23,6 +23,7 @@ Ref : https://blog.me-idea.in.th/mongodb-docker-compose-up-%E0%B8%9B%E0%B8%B8%E0
 ===========================
 
 1. Start App
+   cd D:\Forks\github\Community\PROJECTS\proj-cute-pets\backend
    .\venv\Scripts\activate
    uvicorn app.app:app --reload
    deactivate

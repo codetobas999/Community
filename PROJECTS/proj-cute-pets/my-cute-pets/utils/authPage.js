@@ -1,13 +1,6 @@
-import { request } from './api'
-
-const HOSTNAME = 'http://127.0.0.1:8000'
-/*
-export async function showMenu() {
-  const url = `${HOSTNAME}/menus` 
-  const response = await request('get', url, {}, true) 
-  return response
-}*/
-export async function queryAll() {
+import { request,HOSTNAME } from './api'
+ 
+export async function queryAll() { 
   const url = `${HOSTNAME}/api/v1/auth_page`
   const response = await request('get', url, {}, true) 
   return response.data

@@ -69,9 +69,12 @@ import { mapActions } from 'vuex'
 import Logobar from '@/components/Globals/Logobar' 
 import * as SettingApp from '@/utils/settingApp'
 export default {
+  mounted(){
+      console.log('Mounted : ', this.$nuxt.context.env.config)
+  }, 
   components: {
       Logobar
-    }, 
+  }, 
   layout: 'login_banner',
   auth: false,
   data() {
@@ -124,8 +127,8 @@ export default {
         /*.loginWith('local', { data: this.login })*/
         .loginWith('local', {data:`username=${this.login.username}&password=${this.login.password}`})
         .then((response) => {   
-          console.log(response)  
-          // redirect page
+          //console.log(response)  
+          // redirect page   
           let path = this.$auth.$storage.getUniversal('redirect') || '/'
           this.$auth.$storage.setUniversal('redirect', null)
           this.$router.push(path)
@@ -146,12 +149,12 @@ export default {
           this.isLoading = false
         })*/
 
-      console.log("--------------")
+      //console.log("--------------")
       //this.settingApp = this.mySettingApp
       this.settingApp = await SettingApp.queryByUser()//this.mySettingApp
-      console.log("--------------")  
-      console.log("userLogin : " +  this.login.username +'/' + this.login.password)
-      console.log("show_page1 : " +  this.settingApp.show_page)
+      //console.log("--------------")  
+      //console.log("userLogin : " +  this.login.username +'/' + this.login.password)
+      //console.log("show_page1 : " +  this.settingApp.show_page)
       //console.log("show_page2 : " +  this.$store.state.setting_app.show_page)
       this.isLoading = true
       this.$router.push('/')
@@ -198,11 +201,11 @@ export default {
           //console.log('get_settingApps' + this.$store.state.setting_app)  
           return this.$store.state.setting_app
         },
-        set(newVal) {
-          //console.log('set_settingApp' + newVal) 
+        set(newVal) {  
           this.$store.commit('set_settingApp', newVal)
         }
       },
+     
     /*menus: {
         get() {
           console.log('get_menus' + this.$store.state.menus)  

@@ -38,7 +38,7 @@
       state.fixed = newFixedState
     },
     set_settingApp(state, newsettingApp) {
-      console.log('STORE (SETTING APP)', newsettingApp)
+      //console.log('STORE (SETTING APP)', newsettingApp)
       state.setting_app = newsettingApp
     }
   }

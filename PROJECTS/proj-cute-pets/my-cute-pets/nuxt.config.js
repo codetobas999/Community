@@ -1,6 +1,11 @@
 import colors from 'vuetify/es5/util/colors'
 
+const config = require('./config')
+
 export default {
+  env: {
+    config
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - my-cute-pets',
@@ -26,7 +31,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   //plugins: [{src: '~/plugins/import-validate.js'}],
    // {src: '~/plugins/import-validate.js', mode: 'client'}
-   plugins: [
+   plugins: [  
       //"~/plugins/vee-validate"
     ],
 
@@ -42,7 +47,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth', 
   ],
 
   router: {

@@ -3,6 +3,8 @@
       :headers="headers"
       :items="desserts"
       sort-by="calories"
+      :items-per-page= this.settingApp.show_page
+      :rows-per-page= this.settingApp.show_page
       class="elevation-1"
     >
       <template v-slot:top>
@@ -166,6 +168,12 @@
       formTitle () {
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       }, 
+      settingApp: {
+        get() {
+          console.log('get_settingApps' + this.$store.state.setting_app.show_page)  
+          return this.$store.state.setting_app
+        },  
+      }
     },  
     watch: {
       dialog (val) {

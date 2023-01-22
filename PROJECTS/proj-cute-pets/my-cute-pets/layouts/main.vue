@@ -147,7 +147,7 @@ export default {
     this.getmenu()
   },*/
   mounted() {
-    console.log('state', this.$nuxt.$store.state)
+    //console.log('state', this.$nuxt.$store.state)
     this.getmenu()
     this.my_menus.forEach((menu, mindex) => {
       let active = false
@@ -235,7 +235,8 @@ export default {
         this.$store.commit('set_fixed', val)
         //console.log('NEW DRAWER STATE', this.$nuxt.$store.state.fixed)
       }
-    }
+    },
+   
   }
 }
 </script>

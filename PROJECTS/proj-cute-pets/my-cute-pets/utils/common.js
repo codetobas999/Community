@@ -1,12 +1,12 @@
 import { showMenu } from './permission'
 
-export function writelog(message,level = 0) {
+export function writelog(message,level = 0) {//
   console.log("writelog[" + level + "] : " + message )
   return true
 }
 
 export async function getMenus() { 
-  console.log("getMenus")    
+  //console.log("getMenus")    
   const data = []
   const json_data = await showMenu()  
   for (var i = 0; i < json_data.length; i++) { 

@@ -1,0 +1,16 @@
+Start App
+npm run dev
+
+Start Strapi
+npm run develop
+
+--------------------
+Step1: Start XAMPP(apache , mysql)
+Step2: Start Strapi
+       - เข้าไปไที่ Path 
+       - npm run develop
+Step3: Connect เข้า Strapi 
+       - http://localhost:1337/admin  --> ballketball999@gmail.com/S@msak8192
+Step4: Start nuxt3-scalable-vuetify
+       - เข้าไปไที่ Path 
+       - npm run dev

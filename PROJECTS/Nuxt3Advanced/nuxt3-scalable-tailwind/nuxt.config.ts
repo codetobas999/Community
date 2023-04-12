@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+
+    ssr: true ,  //Server site Handlenring
+
     app: {
       head: {
           htmlAttrs: {
@@ -39,5 +42,11 @@ export default defineNuxtConfig({
       //    Disallow: "",
       //  }
       //],
-    ]
+    ],
+    runtimeConfig: {
+      public: {
+        wpUri: process.env.WP_URI,
+      }
+    },
+    
 })

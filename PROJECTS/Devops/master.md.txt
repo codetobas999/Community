@@ -1,0 +1,79 @@
+## Change hostname to master1
+hostnamectl set-hostname master1
+
+## Letting iptables see bridged traffic
+cat <<EOF > /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+## Refresh config
+sysctl --system
+
+## turnoff swap (type by yourself)
+swapoff -a
+
+##Update file /etc/fstab (comment this line)
+/dev/mapper/centos-swap swap                    swap    defaults        0 0
+
+## Add Kubernetes repo
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes] 
+name=Kubernetes 
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64 
+enabled=1 
+gpgcheck=1
+repo_gpgcheck=1 
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg 
+EOF
+
+# Set SELinux in permissive mode (effectively disabling it)
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+## install kubelet kubeadmin kubectl
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+systemctl enable kubelet
+systemctl start kubelet
+
+## Clone Images for Kubernetes nodes
+
+
+## Create Kuberneters Cluster
+kubeadm config images pull
+kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all
+
+
+## Add devops to group wheel
+usermod -a -G wheel devops
+su – root
+Run command visudo to  update file
+
+## Allows people in group wheel to run all commands
+#(umcommment line below)
+%wheel  ALL=(ALL)       ALL
+
+##Login as devops
+su – devops
+
+## Exit from root, switch to Devops
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+## Install Pod Network
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+
+## get pod information
+kubectl get pods --all-namespaces
+
+## get node information
+kubectl get nodes
+
+
+=======================
+kubeadm join 192.168.1.100:6443 --token nraqf2.myj12wgp2qkm2yvs \
+    --discovery-token-ca-cert-hash sha256:33581a7fdc47da4d549788e62349067c6e0ba66eec8bc35eb28b9ab421d8a77c
+	
+=======================
+iptables -L -v -n

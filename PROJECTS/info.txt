@@ -1,0 +1,50 @@
+Join Zoom Meeting
+https://us06web.zoom.us/j/83385248459?pwd=cXVQbTdoVytTVXhhSkxCTmgxN2Uydz09
+
+Meeting ID: 833 8524 8459
+Passcode: 377040
+---
+
+++++++++++++++++++++++++++++++++
++ วิดีโอบันทึกการอบรม Nuxt 3 Advanced Online
+++++++++++++++++++++++++++++++++
+เอกสารประกอบการอบรม
+---
+https://bit.ly/nuxt3advanced
+
+----------------------------------
+วันที่ 1
+----------------------------------
+https://youtu.be/Q4UmEvAR20U
+
+โค๊ด Workshop ตัวอย่างในคลิปนี้
+---
+https://github.com/iamsamitdev/nuxt3-tailwind
+
+โน๊ตและสคริปต์ที่ใช้สอน
+---
+https://github.com/iamsamitdev/nuxt3-scalable-tailwind/blob/main/NoteScript.txt
+
+----------------------------------
+วันที่ 2
+----------------------------------
+https://youtu.be/ja4L2orxWaw
+
+โค๊ด Workshop ตัวอย่างในคลิปนี้
+---
+https://github.com/iamsamitdev/nuxt3-scalable-tailwind-day2
+
+โน๊ตและสคริปต์ที่ใช้สอน
+---
+https://github.com/iamsamitdev/nuxt3-scalable-tailwind-day2/blob/main/NoteScript.txt
+
+ตัวอย่าง workshop ที่เผยแพร่แล้ว
+---
+https://nuxt3-scalable-tailwind-vercel.vercel.app
+
+************************************************
+ฝากกดติดตามช่องใน youtube ของผมที่
+https://www.youtube.com/user/itgeniuseng
+************************************************
+ขอบคุณมากครับ
+อ.สามิตร โกยม

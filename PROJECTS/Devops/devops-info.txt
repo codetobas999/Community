@@ -1,0 +1,181 @@
+--Step1:  cmd
+
+--Step2: cd path ssh //C:\Users\BAS-DELL\.ssh
+cd .ssh
+
+--Step3: Generate Key(Enter Enter Enter)
+ssh-keygen
+
+--Step4: open C:\Users\BAS-DELL\.ssh\id_rsa.pub
+
+--Step5: Edit from "bas-dell@DESKTOP-B8P3JU3" to "devops"
+
+--Step6 : google cloud
+
+--Step7 : Compute Engine>VM Instances --> Create master1 ,node1,node2
+     - master-1(Singapore/Zone-A) 
+	   Series: N1 , N1-standars-1
+	   OS : CentOS
+	   Version CentOS7
+	   BootDisk:Standard persistent disk
+	   Size : 32 GB
+	 - Firewall Allow HTTP/HTTPS
+       Security	 แล้วให้ Copy text ในไฟล์  C:\Users\BAS-DELL\.ssh\id_rsa.pub มาใส่
+	 - Click Create Button
+	 
+
+     - node-1/2(Singapore/Zone-A) 
+	   Series: N1 , N1-standars-1
+	   OS : CentOS
+	   Version CentOS7
+	   BootDisk:Standard persistent disk
+	   Size : 32 GB
+	 - Firewall Allow HTTP/HTTPS
+       Security	 แล้วให้ Copy text ในไฟล์  C:\Users\BAS-DELL\.ssh\id_rsa.pub มาใส่
+	 - Click Create Button
+
+
+
+
+-- Remote GCP
+Step1 : เข้าไปที่ Path C:\Users\BAS-DELL\.ssh
+
+Step2 : เอา External IP  จาก GCP
+
+Step3 : ssh -i id_rsa devops@35.240.182.128  แล้วเลือก yes
+
+-----------------------------------------------------------
+Install Docker
+
+Step4 : sudo bash //switch user to root
+
+Step5 : yum update -y //Install net-tool ,ntpd
+
+Step6 : systemctl status firewalld //Disibal firewall service
+
+Step7 : systemctl stop firewalld //Stop firewall service
+
+Step8 : systemctl disable firewalld //Disable firewall service
+
+Step9 : yum install -y yum-utils device-mapper-persistent-data lvm2 //Install Device mapper & logical volumn manager
+
+Step10 :## Add docker repo
+yum-config-manager --add-repo \
+  https://download.docker.com/linux/centos/docker-ce.repo
+
+Step11 :## Install Docker CE.
+yum update -y && yum install -y \
+  containerd.io-1.2.13 \
+  docker-ce-19.03.8 \
+  docker-ce-cli-19.03.8
+
+Step12 :## Create /etc/docker directory.
+mkdir /etc/docker
+
+Step13 :# Setup daemon.
+cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
+}
+EOF
+
+Step14 :## Create docker.service.d
+mkdir -p /etc/systemd/system/docker.service.d
+
+Step15 :## Start Docker service
+systemctl daemon-reload
+
+Step16 :## type yourself don't copy & paste
+systemctl restart docker
+
+Step17 :## type yourself don't copy & paste
+systemctl enable docker.service
+
+Step18 :## docker list process
+docker ps
+
+-----------------------------------------------
+Install K8s
+
+Step1 :## Letting iptables see bridged traffic
+cat <<EOF > /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+
+## Refresh config
+sysctl --system
+
+## turnoff swap
+swapoff -a
+
+## Update file /etc/fstab (comment this line) [for Virutalbox]
+#/dev/mapper/centos-swap swap                    swap    defaults        0 0
+
+## Add Kubernetes repo
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+# Set SELinux in permissive mode (effectively disabling it)
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+## install kubelet kubeadmin kubectl
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+## type yourself don't copy & paste
+systemctl enable kubelet
+## type yourself don't copy & paste
+systemctl start kubelet
+
+## Create Kuberneters Cluster  ****************** บทที่19 เวลา 6.49
+kubeadm config images pull
+kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all
+
+******
+ailed to pull image "registry.k8s.io/kube-apiserver:v1.26.2": output: time="2023-03-04T17:34:57Z" level=fatal msg="validate service connection: CRI v1 image API is not implemented for endpoint \"unix:///var/run/containerd/containerd.sock\": rpc error: code = Unimplemented desc = unknown service runtime.v1.ImageService"
+, error: exit status 1
+To see the stack trace of this error execute with --v=5 or higher
+*****
+
+------------------------------------------
+
+## Clond Image for another node (for Virtual box)
+
+## Change hostname to master1
+hostnamectl set-hostname node01
+## or
+hostnamectl set-hostname node02
+
+## install telnet & test connection
+yum install -y telnet
+telnet <master-id> 6443
+
+## Enable firewall 
+sudo iptables -A INPUT -p tcp --dport 6443 -j ACCEPT
+
+## If find error "No route to host", run command below
+iptables --flush
+iptables -tnat --flush
+   
+
+## Join Kubernetes cluster
+
+kubeadm join 192.168.1.100:6443 --token nraqf2.myj12wgp2qkm2yvs \
+    --discovery-token-ca-cert-hash sha256:33581a7fdc47da4d549788e62349067c6e0ba66eec8bc35eb28b9ab421d8a77c --ignore-preflight-errors=all 
+

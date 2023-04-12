@@ -25,9 +25,9 @@ defineProps<{
       </h3>
       <p
         v-if="excerpt"
-        class="grid__content-excerpt mb-2 text-sm text-clip overflow-hidden ..."
+        class="grid__content-excerpt mb-2 text-sm text-clip overflow-hidden ..." 
       >
-        {{ excerpt }}
+      {{ excerpt }}
       </p>
       <NuxtLink
         v-if="slug"

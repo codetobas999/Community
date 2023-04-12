@@ -11,6 +11,9 @@
         <li>
           <NuxtLink to="/categories" class="text-2xl text-gray-300 hover:text-gray-50">Categories</NuxtLink>
         </li>
+        <li>
+          <NuxtLink to="/contact" class="text-xl text-gray-300 hover:text-gray-50">Contact</NuxtLink>
+        </li>
       </ul>
     </div>
   </nav>
@@ -18,7 +21,12 @@
 
 <style scoped>
 
-a.router-link-active {
-  color: teal
+ul > li > a {
+  color: rgb(209,213,219);
 }
+
+ul > li > a.router-link-exact-active {
+  color: rgb(56,189,248);
+}
+
 </style>

@@ -42,7 +42,7 @@ Step1 : เข้าไปที่ Path C:\Users\BAS-DELL\.ssh
 
 Step2 : เอา External IP  จาก GCP
 
-Step3 : ssh -i id_rsa devops@35.240.182.128  แล้วเลือก yes
+Step3 : ssh -i id_rsa devops@34.126.90.84  แล้วเลือก yes
 
 -----------------------------------------------------------
 Install Docker
@@ -138,13 +138,15 @@ sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
 ## install kubelet kubeadmin kubectl
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum list --showduplicates kubeadm --disableexcludes=kubernetes
+yum install -y kubeadm-1.27.x-0 --disableexcludes=kubernetes
 ## type yourself don't copy & paste
 systemctl enable kubelet
 ## type yourself don't copy & paste
 systemctl start kubelet
 
 ## Create Kuberneters Cluster  ****************** บทที่19 เวลา 6.49
-kubeadm config images pull
+kubeadm config images pull --v=5
 kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all
 
 ******

@@ -1,0 +1,39 @@
+Service มี 4 ประเภท
+    ClusterIP เอาไว้ใช้คุยกันระหว่าง Pods ภายใน Cluster ต่อจากข้างนอกเข้ามาไม่ได้
+    NodePort เอาไว้ต่อจากข้างนอกเข้ามาหา Pods ข้างใน โดยเปิด Port รอที่ Node หลังจากนั้นจากส่งต่อ request ที่เข้ามาที่ Port ไปให้ Pod
+    LoadBalancer เอาไว้ต่อจากข้างนอกเข้ามาหา Pods ข้างใน ใช้ได้เฉพาะกรณีที่รัน Kubernetes บน Cloud เช่นถ้าเป็น Kops หรือ EKS บน AWS เราก็จะได้ Elastic Load Balancer (ELB) สำหรับแต่ละ Service
+    ExternalName เอาไว้ต่อจากข้างในออกไปข้างนอก ไม่มีการส่งต่อ traffic จะส่งต่อแค่ชื่อเครื่อง (DNS CNAME) ที่ใช้ๆกันก็เช่นเวลาที่เรารัน managed database บน cloud ชื่อมันจะยาวๆและอาจจะมีเปลี่ยนได้ กรณีนี้เราสามารถสร้าง ExternalName Service มาตั้งชื่อใหม่เข้าใจง่ายไม่เปลี่ยนแปลงตามชื่อ database ไว้ให้ Pods ใน Cluster เราใช้ได้ง่ายๆ
+
+
+----------------------------------------------------------------------------
+-เราสามารถรัน kubectl เพื่อติดตั้ง Deployment ได้ด้วยคำสั่ง
+kubectl apply -f deployment-nginx.yaml
+
+kubectl delete -f deployment-nginx.yaml
+
+
+-เช็คดูว่าตอนนี้ Deployment ของเรามีกี่ Pods
+kubectl get deployment
+
+-เพื่อดูลิสต์ของ Pod --> pod Name = nginx-deployment-7fb96c846b-dwvfw
+kubectl get pod
+
+-ถ้าจะต่อเข้าไปที่ nginx ของเรา ที่เปิดรอที่ Port 80 สามารถใช้ port-forward ตามตัวอย่างอย่างข้างล่างที่ forward จาก localhost:5580 ไปที่ 80
+kubectl port-forward pod/nginx-deployment-7fb96c846b-dwvfw 5580:80
+
+- kubectl describe pod/POD_NAME เพื่อดูข้อมูลลักษณะและสถานะของ Pod 
+  หรือจะใช้ kubectl get pod POD_NAME -o yaml ก็ได้ คล้ายๆกัน แต่จะออกมาเป็น YAML หรือจะ -o json สำหรับคนที่คล่อง JSON มากกว่า YAML
+kubectl describe pod/nginx-deployment-7fb96c846b-dwvfw
+kubectl get pod nginx-deployment-7fb96c846b-dwvfw -o yaml
+
+- kubectl logs POD_NAME เพื่อดู log ของ Pod ซึ่งออกจาก stdout และ stderr และถ้าเราอยากตามดูไปเรื่อยๆ ให้ใช้ -f
+kubectl logs -f nginx-deployment-7fb96c846b-dwvfw
+
+- ถ้าเราอยากต่อเข้าไปใน Pod ให้รัน kubectl exec -it POD_NAME bash ซึ่งอาจจะต้องเปลี่ยน parameter สุดท้าย (bash) ไปตาม Docker Image (บางอันจะเป็น /bin/sh หรืออาจจะไม่มีเลยก็ได้)
+kubectl exec -it nginx-deployment-7fb96c846b-dwvfw bash
+
+-ถ้าเราไม่อยาก kubectl edit สามารถใช้ kubectl scale ได้ ง่าย+สะดวกกว่าด้วย เช่นถ้าเราจะเพิ่มเป็น 3 Pods
+kubectl scale --replicas=3 deployment/nginx-deployment
+
+-ทดสอบ
+ http://localhost:5580

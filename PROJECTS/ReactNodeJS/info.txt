@@ -1,0 +1,30 @@
+--### Create Project
+-- Create Folder ReactNodeDocker
+-- ตั้ง Project ด้วย Vit
+  npm create vite@latest
+  ใส่ชื่อ Project
+  react
+  TypeScript + SWC
+  ----
+  cd sample-react
+  npm install
+  npm run dev
+ ----------------------------------- 
+
+ code .\ชื่อ Project\ -r
+
+ https://ohmyposh.dev/   -- Command สวย
+ -----------------------------------
+
+1. Ceate Dockerfile
+2. Ceate Docker Compose
+3. แก้ไข vite.config.ts
+4. ทดสอบ file Docker Compose  
+   docker compose config  
+5. Run file Docker Compose  
+   docker compose up -d
+
+   ถ้ามีแก้ไข  Docker File หรือ Docker Compose และจะ Run ใหม่
+
+   docker compose up -d --build
+   

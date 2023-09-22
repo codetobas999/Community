@@ -1,0 +1,21 @@
+ https://www.youtube.com/watch?v=wdsiQEa5mQY&t=169s
+ 
+ cd Kafka\app1
+ npm init -y 
+ npm i express
+ npm i sequelize pg pg-hstore
+------------------------------------
+ npm i kafka-node
+
+
+ cd Kafka\app2
+ npm init -y 
+ npm i express mongoose kafka-node
+ ------------------------------------
+ https://sequelize.org/
+
+ docker-compose up
+
+ docker-compose down
+
+ 
